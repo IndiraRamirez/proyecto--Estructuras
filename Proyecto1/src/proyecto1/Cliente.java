@@ -38,7 +38,7 @@ public class Cliente {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre : ");
             int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad  :"));
             int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion :"));
-            
+            //si me deja xd
    }
     
 }
