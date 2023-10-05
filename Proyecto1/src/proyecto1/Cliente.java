@@ -17,11 +17,11 @@ public class Cliente {
     
 
       //constructor      
-    public Cliente(String nombre,  int edad,int id, String correo, int numTelefono) {
+    public Cliente(String nombre,  int edad,int id,  int numTelefono) {
         this.nombre = nombre;
         this.edad = edad;
         this.id = id;
-         this.correo=correo;
+         0correo="";
          this.numTelefono;
             
     }
@@ -35,6 +35,31 @@ public class Cliente {
 
     public int getEdad() {return edad;}
     public void setEdad(int edad) {this.edad = edad;}
+
+   public String getCorreo(){
+        if(correo.equals("")){
+            return "Error: correo no ingresado";
+        }
+        
+        return correo.substring(0, 3)+"....."+
+                correo.substring(correo.indexOf("@"));
+    }
+    
+    public void setCorreo(String pCorreo){
+        if(pCorreo.contains("@")){
+          
+            if(pCorreo.substring(pCorreo.indexOf("@"))
+                    .equals("@gmail.com")){
+                correo=pCorreo;
+            }else{
+                System.out.println("Error: correo no valido"+
+                        " debe ser una cuenta gmail");
+            }
+        }else{
+            System.out.println("Error: correo no valido"+
+                " debe contener @");
+        }
+    }
 
    public void CrearCliente(){
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre : ");
