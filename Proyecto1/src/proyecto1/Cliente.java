@@ -11,16 +11,18 @@ import javax.swing.JOptionPane;
  * @author indir
  */
 public class Cliente {
-     private String nombre;
-     private int  edad,id;
+     private String nombre, correo;
+     private int  edad,id,numTelefono;
      
     
 
       //constructor      
-    public Cliente(String nombre,  int edad,int id) {
+    public Cliente(String nombre,  int edad,int id, String correo, int numTelefono) {
         this.nombre = nombre;
         this.edad = edad;
         this.id = id;
+         this.correo=correo;
+         this.numTelefono;
             
     }
 
