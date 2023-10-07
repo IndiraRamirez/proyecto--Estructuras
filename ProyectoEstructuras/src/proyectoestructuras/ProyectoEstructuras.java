@@ -17,7 +17,7 @@ public class ProyectoEstructuras {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-         
+         Menu m = new Menu();
        int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
@@ -27,15 +27,14 @@ public class ProyectoEstructuras {
                     3.Informacion
                     0.Salir del sistema
                     """)
-            );
-               
+            );   
             switch (opcion) {
                 case 1 -> { 
                     JOptionPane.showMessageDialog(null, "Iniciar sesion master");
-                
+                     m.Menu_UsuarioGlobal();
                 }case 2 ->{ 
                     JOptionPane.showMessageDialog(null, "Iniciar sesion empleado");
-
+                    m.Menu_Empleado();
                 }case 3 ->{ 
                     JOptionPane.showMessageDialog(null, "Se muestra la informacion");
                 }case 0 ->{ 
