@@ -10,4 +10,7 @@ package proyectoestructuras;
  */
 public class Reportes {
     /// aqui van los reportes
+    
+    
+    ////como estan?
 }
