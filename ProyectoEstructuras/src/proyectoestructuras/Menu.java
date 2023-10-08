@@ -11,41 +11,7 @@ import javax.swing.JOptionPane;
  * @author indir
  */
 public class Menu {
-    /**,,,,,,,,,,,,,,,,,,,,,,,,,
-    public void Menu_Inicial(){
-       int opcion;
-        do {
-            opcion = Integer.parseInt(JOptionPane.showInputDialog("""
-                    Seleccione una opción:
-                    1.Iniciar sesion Master
-                    2.Iniciar sesion empleado
-                    3.Informacion
-                    0.Salir del sistema
-                    """)
-            );
-               
-            switch (opcion) {
-                case 1 -> { 
-                    JOptionPane.showMessageDialog(null, "Iniciar sesion master");
-                
-                }case 2 ->{ 
-                    JOptionPane.showMessageDialog(null, "Iniciar sesion empleado");
-
-                }case 3 ->{ 
-                    JOptionPane.showMessageDialog(null, "Se muestra la informacion");
-                }case 0 ->{ 
-                    JOptionPane.showMessageDialog(null, "Adios");
-                    break;
-                }default ->
-                    JOptionPane.showMessageDialog(null, "Opción inválida. "
-                            + "Por favor, seleccione nuevamente.");}
-        }while (opcion != 0);   
-    }
-    **/
-         
-    
-    
-    
+ 
      public void Menu_UsuarioGlobal(){
         int opcion;
         do {
@@ -100,9 +66,9 @@ public class Menu {
                             + "Por favor, seleccione nuevamente.");}
         }while (opcion != 0);   
     }
-
     
     public void Menu_Empleado(){
+        
           int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
@@ -121,10 +87,13 @@ public class Menu {
             switch (opcion) {
                 case 1 -> { 
                     
-                    break;
+                    
                 }case 2 -> {
                     
-                }case 3 -> {
+                }case 3 -> {//crear clienteCliente cliente = new Cliente();
+                   Cliente cliente=new Cliente();
+                           cliente.CrearCliente();
+                    JOptionPane.showMessageDialog(null,cliente.toString());
                    
                 }case 4 ->{
                 }case 5 ->{
