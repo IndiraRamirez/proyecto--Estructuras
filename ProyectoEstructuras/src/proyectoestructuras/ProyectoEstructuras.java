@@ -18,6 +18,7 @@ public class ProyectoEstructuras {
     public static void main(String[] args) {
         // TODO code application logic here
          Menu m = new Menu();
+     
        int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
