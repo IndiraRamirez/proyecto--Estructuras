@@ -5,13 +5,14 @@
 package proyectoestructuras;
 
 import javax.swing.JOptionPane;
+import static proyectoestructuras.ManejoArchivos.manejoArchivos.archivar;
 
 /**
  *
  * @author indir
  */
 public class Menu {
- 
+//Customer c= new Customer("",0,0,0,"");
      public void Menu_UsuarioGlobal(){
         int opcion;
         do {
@@ -92,9 +93,9 @@ public class Menu {
                     
                 }case 3 -> {//crear clienteCliente cliente = new Cliente();
                    Cliente cliente=new Cliente();
-                           cliente.CrearCliente();
-                    JOptionPane.showMessageDialog(null,cliente.toString());
-                   
+                   Customer c=cliente.CrearCliente();
+                   JOptionPane.showMessageDialog(null,c.toString());
+                    archivar("Clientes.txt",c.toString());
                 }case 4 ->{
                 }case 5 ->{
                 }case 6 ->{
