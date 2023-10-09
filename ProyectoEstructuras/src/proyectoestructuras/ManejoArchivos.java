@@ -13,7 +13,7 @@ public class ManejoArchivos {
    
 
 public class manejoArchivos {
-    public static void crearArchivo(String nombreArchivo){
+    public static void crearArchivo(String nombreArchivo){  ///// en estos se borra se escribe la info sobre la que ya estaba ,sirve para actualizar
         File archivo= new File(nombreArchivo);
          
         try{
@@ -43,7 +43,7 @@ public class manejoArchivos {
      
     
      
-    public static void archivarTiquete(String nombreArchivo, String contenido){
+    public static void archivar(String nombreArchivo, String contenido){    /// en este escribio debajo de lo que ya estaba
         File archivo= new File(nombreArchivo);
         
         try{
