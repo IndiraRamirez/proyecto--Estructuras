@@ -9,5 +9,6 @@ package proyectoestructuras;
  * @author indir
  */
 public class Vehiculo {
+    //// prueba
     
 }
