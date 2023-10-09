@@ -16,18 +16,12 @@ public class Cliente {
         do{   
         correoDado=JOptionPane.showInputDialog("Ingrese su correo: ");
             if(correoDado.contains("@")){
-                if(correoDado.substring(correoDado.indexOf("@"))
-                        .equals("@gmail.com")){
-                    correo=correoDado;
-                }
-                if(correoDado.substring(correoDado.indexOf("@"))
-                        .equals("@hotmail.com")){
-                        correo=correoDado;
-                        }
-                else{
-                    JOptionPane.showMessageDialog(null,"Error: correo no valido"+
+            switch (correoDado.substring(correoDado.indexOf("@"))) {
+                case "@gmail.com" -> correo=correoDado;
+                case "@hotmail.com" -> correo=correoDado;
+                default -> JOptionPane.showMessageDialog(null,"Error: correo no valido"+
                             " debe ser una cuenta valida" , "Error", 0);
-                }
+            }
             }else{
                JOptionPane.showMessageDialog(null, "Error: correo no valido"+
                     " debe contener @", "Alerta", 0);
