@@ -39,7 +39,7 @@ public class ProyectoEstructuras {
                 }case 3 ->{ 
                     JOptionPane.showMessageDialog(null, "Se muestra la informacion");
                 }case 0 ->{ 
-                    JOptionPane.showMessageDialog(null, "Adios");
+                    JOptionPane.showMessageDialog(null, "Cerrando sistema");
                     break;
                 }default ->
                     JOptionPane.showMessageDialog(null, "Opción inválida. "
