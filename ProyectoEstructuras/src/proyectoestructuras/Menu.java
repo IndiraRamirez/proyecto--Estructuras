@@ -15,7 +15,7 @@ public class Menu {
 //Customer c= new Customer("",0,0,0,"");
      public void Menu_UsuarioGlobal(){
         int opcion;
-        do {
+       
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
                     Seleccione una opción:
                     1.Crear usuario
@@ -65,21 +65,21 @@ public class Menu {
                 }default ->
                     JOptionPane.showMessageDialog(null, "Opción inválida. "
                             + "Por favor, seleccione nuevamente.");}
-        }while (opcion != 0);   
+        
     }
     
     public void Menu_Empleado(){
         
           int opcion;
-        do {
+       
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
                     Seleccione una opción:
-                    1. Actualizar estado de vehiculos
+                    1.Actualizar estado de vehiculos
                     2.Ver lista vehiculos
                     3.Crear lista cliente
                     4.Busca Cliente
                     5.Consultar garantia vehiculo
-                    6.buscar vehiculo
+                    6.Buscar vehiculo
                     7.Informacion 
                     0.Salir del sistema
                     """)
@@ -106,9 +106,9 @@ public class Menu {
             }default ->
                     JOptionPane.showMessageDialog(null, "Opción inválida. "
                             + "Por favor, seleccione nuevamente.");}
-        }while (opcion != 0);   
+         
+    
     }
-
 } 
     
 
