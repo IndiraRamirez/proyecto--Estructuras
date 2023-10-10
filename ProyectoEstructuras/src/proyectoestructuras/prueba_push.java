@@ -9,8 +9,5 @@ package proyectoestructuras;
  * @author JeffryCH
  */
 public class prueba_push {
-    alkdjlakjhdkljashdkljaskljda
-            
-            
-            akfdfdsfjdhaskjdhjkas
+   
 }
