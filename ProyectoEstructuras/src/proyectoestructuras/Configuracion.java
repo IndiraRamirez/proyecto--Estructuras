@@ -5,7 +5,7 @@
 package proyectoestructuras;
 
 /**
- *
+ 
  * @author Jeffe
  */
 public class Configuracion {
