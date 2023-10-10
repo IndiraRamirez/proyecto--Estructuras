@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author indir
  */
 public class ProyectoEstructuras {
-
+///Como estas?
     /**
      * @param args the command line arguments
      */
