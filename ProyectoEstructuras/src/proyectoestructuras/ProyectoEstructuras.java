@@ -18,6 +18,7 @@ public class ProyectoEstructuras {
     public static void main(String[] args) {
         // TODO code application logic here
          Menu m = new Menu();
+         Configuracion conf= new Configuracion();
          ///Holaaaa
        int opcion;
         do {
@@ -38,6 +39,8 @@ public class ProyectoEstructuras {
                     m.Menu_Empleado();
                 }case 3 ->{ 
                     JOptionPane.showMessageDialog(null, "Se muestra la informacion");
+                    JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
+                   
                 }case 0 ->{ 
                     JOptionPane.showMessageDialog(null, "Cerrando sistema");
                     break;
