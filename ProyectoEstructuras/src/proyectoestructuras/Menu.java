@@ -13,6 +13,7 @@ import static proyectoestructuras.ManejoArchivos.manejoArchivos.archivar;
  */
 public class Menu {
 //Customer c= new Customer("",0,0,0,"");
+    Configuracion conf=new Configuracion();
      public void Menu_UsuarioGlobal(){
         int opcion;
         do {
@@ -59,6 +60,7 @@ public class Menu {
                                 + "Por favor, seleccione nuevamente.");
                         }     
                 }case 7 ->{
+                     JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                 }case 0 ->{
                     JOptionPane.showMessageDialog(null, "¡Hasta luego!");
                      break; 
@@ -100,6 +102,7 @@ public class Menu {
                 }case 5 ->{
                 }case 6 ->{
                 }case 7 ->{
+                     JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                 }case 0 ->{
                     JOptionPane.showMessageDialog(null, "¡Hasta luego!");
                      break; 
