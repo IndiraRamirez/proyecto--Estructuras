@@ -4,7 +4,6 @@
  */
 package proyectoestructuras;
 
-import javax.swing.JOptionPane;
 
 /**
  *
