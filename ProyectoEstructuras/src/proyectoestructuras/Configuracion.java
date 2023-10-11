@@ -20,16 +20,14 @@ public class Configuracion {
     
     
     
-        //System.out.println("Nombre: " + nombre);
-        //System.out.println("Teléfono: " + telefono);
-        //System.out.println("Dirección: " + direccion);
+  
     
     public String toString() {
         return """
-               Empresa
-               """ +nombre+"\n"+
+               Bienvenidos a
+               """ +"                            ¡"+nombre+"!"+"\n"+
                 "Nos encontramos en "+direccion+"\n"+
-                "Para más informacion contactanos "+"numero de telefono"+telefono+"\n";
+                "Para más informacion contactanos "+"numero de telefono "+telefono+"\n";
     }
 }
 
