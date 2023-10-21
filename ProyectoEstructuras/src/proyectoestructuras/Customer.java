@@ -61,8 +61,7 @@ public class Customer {
             return "Error: correo no ingresado";
         }
         
-        return correo.substring(0, 3)+"....."+
-                correo.substring(correo.indexOf("@"));
+        return correo;
     }
     @Override
     public String toString() { 
