@@ -10,16 +10,30 @@ package proyectoestructuras;
  * @author indir
  */
 public class Customer {
-       public String nombre,correo;
+       public String nombre,apellido,correo;
      public int  edad,id, numeroTel;
 
-    public  Customer (String nombre, int edad, int id, int numeroTel, String correo) {
+    public  Customer (String nombre,String apellido , int edad, int id, int numeroTel, String correo) {
         this.nombre = nombre;
+        this.apellido=apellido;
         this.edad = edad;
+        this.apellido=apellido;
         this.id = id;
         this.numeroTel = numeroTel;
         this.correo = correo;
     }
+
+    
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -57,10 +71,6 @@ public class Customer {
         this.correo = correo;
     }
    public String getCorreo(){
-        if(correo.equals("")){
-            return "Error: correo no ingresado";
-        }
-        
         return correo;
     }
     @Override
@@ -68,9 +78,12 @@ public class Customer {
         return """
                 Cliente
                 Nombre=""" + nombre +"\n"+
+                "Apellido=" + apellido+"\n"+
                 "Edad=" + edad +"\n"+
                 "Id=" + id +"\n"+
                 "Numero telefonico="+numeroTel+"\n"+
-                "Correo electronico="+getCorreo()+"\n";
+                "Correo electronico="+correo+"\n"+
+                "----------------------------------------";
     }
 }
+
