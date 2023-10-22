@@ -4,27 +4,32 @@
  */
 package proyectoestructuras;
 
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author indir
  */
 public class Customer {
-       public String nombre,apellido,correo;
+    public String nombre,apellido,correo;
      public int  edad,id, numeroTel;
-
-    public  Customer (String nombre,String apellido , int edad, int id, int numeroTel, String correo) {
+     
+    Customer() {
+      }
+    public Customer(String nombre, String apellido, int edad, int id, int numeroTel, String correo) {
         this.nombre = nombre;
-        this.apellido=apellido;
+        this.apellido = apellido;
+        this.correo = correo;
         this.edad = edad;
-        this.apellido=apellido;
         this.id = id;
         this.numeroTel = numeroTel;
-        this.correo = correo;
     }
 
-    
+   
 
+    
+    
     public String getApellido() {
         return apellido;
     }
@@ -33,14 +38,24 @@ public class Customer {
         this.apellido = apellido;
     }
 
-    
-
-    public String getNombre() {
-        return nombre;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+     public void setCorreo(String pCorreo){
+        if(pCorreo.contains("@")){
+           
+            if(pCorreo.substring(pCorreo.indexOf("@"))
+                    .equals("@ufide.ac.cr")){
+                correo=pCorreo;
+            }else{
+                JOptionPane.showMessageDialog(null,"Error: correo no valido"+
+                            " debe ser una cuenta valida" , "Error", 0);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Error: correo no valido"+
+                    " debe contener @", "Alerta", 0);
+        }
     }
 
     public int getEdad() {
@@ -51,14 +66,6 @@ public class Customer {
         this.edad = edad;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getNumeroTel() {
         return numeroTel;
     }
@@ -67,23 +74,51 @@ public class Customer {
         this.numeroTel = numeroTel;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+
+    public int getId() {
+        return id;
     }
-   public String getCorreo(){
-        return correo;
+
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+     public String correoDado(String correo){
+        String correoDado;
+        do{   
+        correoDado=JOptionPane.showInputDialog("Ingrese su correo: ");
+            if(correoDado.contains("@")){
+            switch (correoDado.substring(correoDado.indexOf("@"))) {
+                case "@gmail.com" -> correo=correoDado;
+                case "@hotmail.com" -> correo=correoDado;
+                default -> JOptionPane.showMessageDialog(null,"Error: correo no valido"+
+                            " debe ser una cuenta valida" , "Error", 0);
+            }
+            }else{
+               JOptionPane.showMessageDialog(null, "Error: correo no valido"+
+                    " debe contener @", "Alerta", 0);
+            }
+        
+       }while(correo==null ||correo.equals(""));
+        return correoDado;
+     }
+
     @Override
-    public String toString() { 
+    public String toString() {
         return """
-                Cliente
-                Nombre=""" + nombre +"\n"+
-                "Apellido=" + apellido+"\n"+
-                "Edad=" + edad +"\n"+
-                "Id=" + id +"\n"+
-                "Numero telefonico="+numeroTel+"\n"+
-                "Correo electronico="+correo+"\n"+
-                "----------------------------------------";
+               Cliente
+                [id= """ + id + "\n"+
+                "nombre= " + nombre +"  apellido= "+apellido+"\n"+
+                "edad= "+edad+"  numTel= "+numeroTel+"\n"+
+                "correo= "+correo+"]"+"\n"+
+        "----------------------------------";
     }
 }
 
