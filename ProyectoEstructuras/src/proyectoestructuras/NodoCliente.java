@@ -5,7 +5,7 @@
 package proyectoestructuras;
 
 /**
- *
+ 
  * @author indir
  */
 public class NodoCliente {
@@ -39,9 +39,6 @@ public class NodoCliente {
     public String toString() {
         return "Nodo{" + persona +" }";
     }
-    
-    
-    
-    
+
 }
 
