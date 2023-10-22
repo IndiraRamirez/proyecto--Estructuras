@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author indir
  */
 public class ProyectoEstructuras {
-///Como estas?
+
     /**
      * @param args the command line arguments
      */
@@ -35,10 +35,11 @@ public class ProyectoEstructuras {
                     JOptionPane.showMessageDialog(null, "Iniciar sesion master");
                      m.Menu_UsuarioGlobal();
                 }case 2 ->{ 
-                    JOptionPane.showMessageDialog(null, "Iniciar sesion empleado");
+                    JOptionPane.showMessageDialog(null,  "Iniciar sesion empleado", "Sesion empleado", JOptionPane.INFORMATION_MESSAGE);
+                    
                     m.Menu_Empleado();
                 }case 3 ->{ 
-                    JOptionPane.showMessageDialog(null, "Se muestra la informacion");
+                    
                     JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                    
                 }case 0 ->{ 
