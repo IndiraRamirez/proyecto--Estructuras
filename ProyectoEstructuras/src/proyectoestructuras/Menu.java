@@ -5,7 +5,7 @@
 package proyectoestructuras;
 
 import javax.swing.JOptionPane;
-import static proyectoestructuras.ManejoArchivos.manejoArchivos.archivar;
+
 
 /**
  *
