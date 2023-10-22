@@ -1,5 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+  Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyectoestructuras;
@@ -19,7 +19,7 @@ public class ListaCliente {
         return cabeza;
     }
 
-    // Agregar persona ordenada por id
+    // Agrega personas en lista enlanzada
     public void agregarPersonaOrdenado(Customer persona) {
         NodoCliente nuevoNodo = new NodoCliente(persona);
         if (cabeza == null || cabeza.getPersona().getId() > persona.getId()) {
@@ -35,7 +35,7 @@ public class ListaCliente {
         }
     }
 
-    // Método para mostrar personas
+    // Muestra lista
     public void mostrarPersonas() {
         NodoCliente aux = cabeza;
         while (aux != null) {
