@@ -12,7 +12,8 @@ import static proyectoestructuras.ManejoArchivos.manejoArchivos.archivar;
  * @author indir
  */
 public class Menu {
-//Customer c= new Customer("",0,0,0,"");
+    Customer p= new Customer();
+        ListaCliente lista = new ListaCliente();
     Configuracion conf=new Configuracion();
      public void Menu_UsuarioGlobal(){
         int opcion;
@@ -69,7 +70,7 @@ public class Menu {
                             + "Por favor, seleccione nuevamente.");}
         }while (opcion != 0);   
     }
-    
+     Customer c= new Customer();
     public void Menu_Empleado(){
         
           int opcion;
@@ -86,19 +87,35 @@ public class Menu {
                     0.Salir del sistema
                     """)
             );
-               
+            
+           
             switch (opcion) {
                 case 1 -> { 
                     
                     
                 }case 2 -> {
                     
-                }case 3 -> {//crear clienteCliente cliente = new Cliente();
-                   Cliente cliente=new Cliente();
-                   Customer c=cliente.CrearCliente();
-                   JOptionPane.showMessageDialog(null,c.toString());
-                    archivar("Clientes.txt",c.toString());
+                }case 3 -> {
+                  String correo="";
+                   String nombre = JOptionPane.showInputDialog("Ingrese el nombre : ");
+                    String apellido = JOptionPane.showInputDialog("Ingrese su apellido: ");
+                    int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad  :"));
+                    int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion :"));
+                    int numeroTel = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero telefono:"));
+                    correo=p.correoDado(correo);
+                    lista.agregarPersonaOrdenado(new Customer(nombre,apellido,edad,id,numeroTel,correo));
+                    break;
+                    
                 }case 4 ->{
+                    
+                      StringBuilder sb = new StringBuilder();
+                    NodoCliente aux = lista.getCabeza();
+                    while (aux != null) {
+                        sb.append(aux.getPersona()).append("\n");
+                        aux = aux.getSiguiente();
+                    }
+                    JOptionPane.showMessageDialog(null, sb.toString());
+                    break;
                 }case 5 ->{
                 }case 6 ->{
                 }case 7 ->{
