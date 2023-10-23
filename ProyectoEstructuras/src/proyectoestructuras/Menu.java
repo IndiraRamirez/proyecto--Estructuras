@@ -110,10 +110,14 @@ public class Menu {
                     String apellido = JOptionPane.showInputDialog("Ingrese su apellido: ");
                     int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad  :"));
                     int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion :"));
+                    if (lista.compararId(id)) {
+                        break;
+                    } else {
                     int numeroTel = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero telefono:"));
                     correo=p.correoDado(correo);
                     lista.agregarPersonaOrdenado(new Customer(nombre,apellido,edad,id,numeroTel,correo));
                     break;
+                    }
                     
                 }case 4 ->{
                     //El programa debe permitir la  lectura y actualización de clientes. listo
