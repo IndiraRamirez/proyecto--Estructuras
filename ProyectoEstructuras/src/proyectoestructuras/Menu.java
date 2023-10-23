@@ -23,7 +23,7 @@ public class Menu {
                     1.Crear usuario
                     2.Crear vehiculos
                     3.Ver Usuarios
-                    4.Ver lista cliente
+                    4.Gestion de clientes
                     5.Eliminar usuario
                     6.Consultar reportes
                     7.Informacion 
@@ -36,6 +36,14 @@ public class Menu {
                 }case 2 ->{ 
                 }case 3 ->{
                 }case 4 ->{
+                    StringBuilder sb = new StringBuilder();
+                            NodoCliente aux = lista.getCabeza();
+                            while (aux != null) {
+                                sb.append(aux.getPersona()).append("\n");
+                                aux = aux.getSiguiente();
+                            }
+                            JOptionPane.showMessageDialog(null, sb.toString() , "Lista de Clientes", JOptionPane.DEFAULT_OPTION);
+                            break;
                 }case 5 ->{
                 }case 6 ->{
                     JOptionPane.showMessageDialog(null, " A continuacion"
@@ -79,11 +87,11 @@ public class Menu {
                     Seleccione una opción:
                     1.Actualizar estado de vehiculos
                     2.Ver lista vehiculos
-                    3.Crear lista cliente
-                    4.Busca Cliente
+                    3.Crear lista cliente      
+                    4.Ver lista cliente         
                     5.Consultar garantia vehiculo
                     6.Buscar vehiculo
-                    7.Informacion 
+                    7.Informacion              
                     0.Salir del sistema
                     """)
             );
@@ -96,6 +104,7 @@ public class Menu {
                 }case 2 -> {
                     
                 }case 3 -> {
+                    //El programa debe permitir la creación de clientes.
                   String correo="";
                    String nombre = JOptionPane.showInputDialog("Ingrese el nombre : ");
                     String apellido = JOptionPane.showInputDialog("Ingrese su apellido: ");
@@ -107,28 +116,51 @@ public class Menu {
                     break;
                     
                 }case 4 ->{
-                    
-                      StringBuilder sb = new StringBuilder();
-                    NodoCliente aux = lista.getCabeza();
-                    while (aux != null) {
-                        sb.append(aux.getPersona()).append("\n");
-                        aux = aux.getSiguiente();
-                    }
-                    JOptionPane.showMessageDialog(null, sb.toString());
-                    break;
+                    //El programa debe permitir la  lectura y actualización de clientes. listo
+                    //El programa no debe permitir registrar dos clientes con la misma identificación. *****falta****
+                    int op;
+                    do {
+                        op=Integer.parseInt(JOptionPane.showInputDialog(null, """
+                                                                                    Seleccione una opcion:
+                                                                                    1.Buscar Cliente
+                                                                                    2.Ver lista de clientes
+                                                                                    3.Modificar 
+                                                                                    0.Salir del sistema""", "Clientes", JOptionPane.QUESTION_MESSAGE));
+                        
+                        
+                        switch (op) {
+                        case 1 -> { 
+                            
+                            lista.buscar();
+                        }case 2 -> {
+                            StringBuilder sb = new StringBuilder();
+                            NodoCliente aux = lista.getCabeza();
+                            while (aux != null) {
+                                sb.append(aux.getPersona()).append("\n");
+                                aux = aux.getSiguiente();
+                            }
+                            JOptionPane.showMessageDialog(null, sb.toString() , "Lista de Clientes", JOptionPane.DEFAULT_OPTION);
+                            break;
+                        }case 3 -> {
+                            lista.modificar();
+                        }case 4 ->{
+                             break;
+                       }
+                       }
+                    }while(op!=0);
                 }case 5 ->{
                 }case 6 ->{
                 }case 7 ->{
                      JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                 }case 0 ->{
-                    JOptionPane.showMessageDialog(null, "¡Hasta luego!");
+                    JOptionPane.showMessageDialog(null,  "¡Cerrando sistema!", "Cerrando", JOptionPane.INFORMATION_MESSAGE);
+                    
                      break; 
             }default ->
-                    JOptionPane.showMessageDialog(null, "Opción inválida. "
-                            + "Por favor, seleccione nuevamente.");}
+                    JOptionPane.showMessageDialog(null,  "Opción inválida. "
+                            + "Por favor, seleccione nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }while (opcion != 0);   
     }
 
 } 
-    
-
