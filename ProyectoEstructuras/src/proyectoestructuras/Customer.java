@@ -109,6 +109,8 @@ public class Customer {
        }while(correo==null ||correo.equals(""));
         return correoDado;
      }
+     
+     
 
     @Override
     public String toString() {
