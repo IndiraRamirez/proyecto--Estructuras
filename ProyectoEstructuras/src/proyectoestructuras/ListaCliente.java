@@ -77,6 +77,20 @@ public class ListaCliente {
        
     }
     
+    public boolean compararId(int id){
+        NodoCliente aux = cabeza;
+        boolean bandera=false;// existe un cliente con ese id?
+        while(aux!=null){
+            if(aux.getPersona().getId()==id){ //lo busca
+                JOptionPane.showMessageDialog(null, "Ya existe un cliente con ese id"); 
+                bandera=true;//la condicion cambia
+                return bandera;
+            }
+            aux=aux.getSiguiente();
+        }
+         return bandera;//si no existe la condicion es falsa
+    }
+    
     public void buscar() {
     NodoCliente aux = cabeza;
     boolean bandera=false;// para saber si lo encontramos
@@ -100,8 +114,3 @@ public class ListaCliente {
     }
 
 }
-    
-    
-
-
-
