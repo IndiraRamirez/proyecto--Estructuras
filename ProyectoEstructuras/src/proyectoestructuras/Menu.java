@@ -18,7 +18,7 @@ public class Menu {
     Configuracion conf=new Configuracion();
     ManejoArchivos m = new ManejoArchivos();
      public void Menu_UsuarioGlobal() throws IOException{
-         lista.ComprobarAR();
+         
          
         int opcion;
         do {
