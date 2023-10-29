@@ -42,21 +42,10 @@ public class Customer {
         return correo;
     }
 
-     public void setCorreo(String pCorreo){
-        if(pCorreo.contains("@")){
-           
-            if(pCorreo.substring(pCorreo.indexOf("@"))
-                    .equals("@ufide.ac.cr")){
-                correo=pCorreo;
-            }else{
-                JOptionPane.showMessageDialog(null,"Error: correo no valido"+
-                            " debe ser una cuenta valida" , "Error", 0);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Error: correo no valido"+
-                    " debe contener @", "Alerta", 0);
+     public void setCorreo(String correo){
+        this.correo=correo;
         }
-    }
+    
 
     public int getEdad() {
         return edad;
