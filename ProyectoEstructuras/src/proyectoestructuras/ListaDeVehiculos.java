@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyectoestructuras;
+import java.io.*;
 
 /**
  *
@@ -36,14 +37,38 @@ public class ListaDeVehiculos {
     }
 
     public String listarVehiculos() {
-        StringBuilder sb = new StringBuilder();
+        String resultado = "";
         NodoVehiculo aux = cabeza;
         while (aux != null) {
-            sb.append(aux.getVehiculo().toString()).append("\n");
+            resultado += aux.getVehiculo().toString() + "\n";
             aux = aux.getSiguiente();
         }
-        return sb.toString();
+        return resultado;
     }
+    
 
-    // me falta algo?
+    public void guardarEnArchivo(String nombreArchivo) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            NodoVehiculo actual = cabeza;
+            while (actual != null) {
+                bw.write(actual.getVehiculo().toString());
+                bw.newLine();  // para saltar a la siguiente línea
+                actual = actual.getSiguiente();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar en archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDesdeArchivo(String nombreArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cargar desde archivo: " + e.getMessage());
+        }
+    }
 }
+  
