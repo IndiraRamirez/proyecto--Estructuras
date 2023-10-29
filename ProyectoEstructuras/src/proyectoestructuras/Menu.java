@@ -17,6 +17,7 @@ public class Menu {
         ListaCliente lista = new ListaCliente();
     Configuracion conf=new Configuracion();
     ManejoArchivos m = new ManejoArchivos();
+    ListaDeVehiculos listaDeVehiculos = new ListaDeVehiculos();
     public void Menu_UsuarioGlobal() throws IOException{
     int opcion;
         do {
@@ -53,8 +54,12 @@ public class Menu {
                     String nombre = JOptionPane.showInputDialog("Escriba el correo del nuevo usuario");
                     String contra = JOptionPane.showInputDialog("Escriba una contrasenna para el nuevo usuario");
                     m.AgregarUE(nombre, contra);
-                }case 1 ->{ 
-                }case 2 ->{
+                }case 1 ->{                     
+                    Vehiculo nuevoVehiculo = CrearVehiculo.crearNuevoVehiculo();
+                    JOptionPane.showMessageDialog(null, "Vehículo creado exitosamente:\n" + nuevoVehiculo.toString());
+                }case 2 -> {
+
+
                 }case 3 ->{
                     StringBuilder sb = new StringBuilder();
                             NodoCliente aux = lista.getCabeza();
@@ -133,9 +138,15 @@ public class Menu {
             }
             switch (opcion) {
                 case 0 -> { 
+                }
                     
-                }case 1 -> {
-                    
+                    case 1 -> {
+                        String vehiculosStr = listaDeVehiculos.listarVehiculos();
+                        if (!vehiculosStr.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay vehículos registrados.");
+                        }  
                 }case 2 -> {
                     //El programa debe permitir la creación de clientes.
                   String correo="";
