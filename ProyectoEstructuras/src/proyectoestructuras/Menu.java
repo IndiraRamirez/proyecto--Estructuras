@@ -4,6 +4,7 @@
  */
 package proyectoestructuras;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 
@@ -15,7 +16,10 @@ public class Menu {
     Customer p= new Customer();
         ListaCliente lista = new ListaCliente();
     Configuracion conf=new Configuracion();
-     public void Menu_UsuarioGlobal(){
+    ManejoArchivos m = new ManejoArchivos();
+     public void Menu_UsuarioGlobal() throws IOException{
+         lista.ComprobarAR();
+         
         int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("""
@@ -33,6 +37,9 @@ public class Menu {
                
             switch (opcion) {
                 case 1 -> { 
+                    String nombre = JOptionPane.showInputDialog("Escriba el correo del nuevo usuario");
+                    String contra = JOptionPane.showInputDialog("Escriba una contrasenna para el nuevo usuario");
+                    m.AgregarUE(nombre, contra);
                 }case 2 ->{ 
                 }case 3 ->{
                 }case 4 ->{
