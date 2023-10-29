@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyectoestructuras;
+import java.io.Serializable;
 
 /**
  *
  * @author JeffryCh
  */
-public class Vehiculo {
+public class Vehiculo implements Serializable {
 
     // Enumeración para el tipo de vehículo
     public enum TipoVehiculo {
