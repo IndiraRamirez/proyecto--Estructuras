@@ -58,6 +58,7 @@ public class Menu {
                     Vehiculo nuevoVehiculo = CrearVehiculo.crearNuevoVehiculo();
                     JOptionPane.showMessageDialog(null, "Vehículo creado exitosamente:\n" + nuevoVehiculo.toString());
                 }case 2 -> {
+                    //ver usuarios
 
 
                 }case 3 ->{
@@ -70,12 +71,13 @@ public class Menu {
                             JOptionPane.showMessageDialog(null, sb.toString() , "Lista de Clientes", JOptionPane.DEFAULT_OPTION);
                             break;
                 }case 4 ->{
+                    //eliminar usuario
                 }case 5 ->{
                     JOptionPane.showMessageDialog(null, " A continuacion"
                              + " se le presentaran los reportes: ");
                     int opcionR = Integer.parseInt(JOptionPane.showInputDialog("""
                        Seleccione una opcion:
-                       1.Cantidad total de autos venditos, reservados y disponibles
+                       1.Cantidad total de autos vendidos, reservados y disponibles
                        2.Cantidad de clientes registrados, clientes que compraron un vehículo, clientes que reservaron un 
                        vehículo.
                        3.Top 3 de clientes que más compraron vehículos
@@ -83,7 +85,7 @@ public class Menu {
                        5.Cantidad de vehículos reservados por vendedor"""));
                        switch (opcionR) {
                             case 1->{
-                           }case 2->{
+                           }case 2->{JOptionPane.showMessageDialog(null, "Clientes Registrados\n"+ p.numCliente);
                            }case 3->{
                            }case 4->{   
                            }case 5->{ 
@@ -104,7 +106,8 @@ public class Menu {
         }while(opcion != 7);   
     }
      Customer c= new Customer();
-    public void Menu_Empleado(){
+     ManejoArchivos clientes = new ManejoArchivos();
+    public void Menu_Empleado() throws IOException{
         
           int opcion;
         do {
@@ -138,9 +141,8 @@ public class Menu {
             }
             switch (opcion) {
                 case 0 -> { 
-                }
-                    
-                    case 1 -> {
+                    //actualizar estado
+                }case 1 -> {
                         String vehiculosStr = listaDeVehiculos.listarVehiculos();
                         if (!vehiculosStr.isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
@@ -160,17 +162,17 @@ public class Menu {
                     int numeroTel = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero telefono:"));
                     correo=p.correoDado(correo);
                     lista.agregarPersonaOrdenado(new Customer(nombre,apellido,edad,id,numeroTel,correo));
+                    p.numeroClientesRegistrados();
                     break;
                     }
                     
                 }case 3 ->{
-                    //El programa debe permitir la  lectura y actualización de clientes. listo
-                    //El programa no debe permitir registrar dos clientes con la misma identificación. *****falta****
+                    
                     int op;
                     do {
                         String[] opcionesM = {"Buscar Cliente", "Ver lista de clientes", "Modificar", "Salir"};
                         op=JOptionPane.showOptionDialog(null, "Seleccione una opción:", "Opciones", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcionesM, opcionesM[3]);
-
+                        
                         switch (op) {
                         case 0 -> { 
                             
@@ -192,7 +194,9 @@ public class Menu {
                        }
                     }while(op!=3);
                 }case 4 ->{
+                    //consultar garantia
                 }case 5 ->{
+                    //buscar vehiculo
                 }case 6 ->{
                      JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                 }case 7 ->{
