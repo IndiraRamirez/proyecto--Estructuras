@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Customer {
     public String nombre,apellido,correo;
-     public int  edad,id, numeroTel;
+     public int  edad,id, numeroTel,numCliente;
      
     Customer() {
       }
@@ -26,10 +26,7 @@ public class Customer {
         this.numeroTel = numeroTel;
     }
 
-   
-
-    
-    
+ 
     public String getApellido() {
         return apellido;
     }
@@ -45,6 +42,14 @@ public class Customer {
      public void setCorreo(String correo){
         this.correo=correo;
         }
+
+    public int getNumCliente() {
+        return numCliente;
+    }
+
+    public void setNumCliente(int numCliente) {
+        this.numCliente = numCliente;
+    }
     
 
     public int getEdad() {
@@ -63,7 +68,6 @@ public class Customer {
         this.numeroTel = numeroTel;
     }
 
-
     public int getId() {
         return id;
     }
@@ -79,6 +83,13 @@ public class Customer {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    int numClientes = 0;
+    
+    public int numeroClientesRegistrados(){
+        numCliente+=1;
+        return numCliente;
+    }
+    
      public String correoDado(String correo){
         String correoDado;
         do{   
