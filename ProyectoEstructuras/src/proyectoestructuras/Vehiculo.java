@@ -1,24 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectoestructuras;
-import java.io.Serializable;
 
-/**
- *
- * @author JeffryCh
- */
-public class Vehiculo implements Serializable {
+public class Vehiculo {
 
     // Enumeración para el tipo de vehículo
     public enum TipoVehiculo {
-        SUV, SEDAN, HATCHBACK
+        SEDAN, SUV, HATCHBACK
     }
 
     // Enumeración para el estado del vehículo
     public enum EstadoVehiculo {
-        DISPONIBLE, RESERVADO, VENDIDO
+        DISPONIBLE, RESERVADO, VENDIDO;
+    
+        public static EstadoVehiculo fromString(String estado) {
+            switch(estado.toUpperCase()) {
+                case "DISPONIBLE": return DISPONIBLE;
+                case "RESERVADO": return RESERVADO;
+                case "VENDIDO": return VENDIDO;
+                default: throw new IllegalArgumentException("Estado no válido: " + estado);
+            }
+        }
     }
 
     private String color;
@@ -34,54 +34,77 @@ public class Vehiculo implements Serializable {
     private String vendedor;
 
     // Constructor
-    public Vehiculo(String color, int anio, int cilindraje, String marca, String modelo, double kilometraje, TipoVehiculo tipo, String caracteristicas) {
+    public Vehiculo(String marca, String modelo, String color, int anio, int cilindraje,
+                    double kilometraje, TipoVehiculo tipo, String caracteristicas,
+                    EstadoVehiculo estado, String cliente, String vendedor) {
+        if (anio < 0) throw new IllegalArgumentException("El año no puede ser negativo");
+        if (cilindraje < 0) throw new IllegalArgumentException("El cilindraje no puede ser negativo");
+        if (kilometraje < 0) throw new IllegalArgumentException("El kilometraje no puede ser negativo");
+
+        this.marca = marca;
+        this.modelo = modelo;
         this.color = color;
         this.anio = anio;
         this.cilindraje = cilindraje;
-        this.marca = marca;
-        this.modelo = modelo;
         this.kilometraje = kilometraje;
         this.tipo = tipo;
         this.caracteristicas = caracteristicas;
-        this.estado = EstadoVehiculo.DISPONIBLE;
-        this.cliente = null;
-        this.vendedor = null;
+        this.estado = estado;
+        this.cliente = cliente;
+        this.vendedor = vendedor;
     }
 
-    // Set
-    public void setColor(String color) {
-        this.color = color;
+    // Constructor sobrecargado para casos donde no todos los datos están disponibles
+    public Vehiculo(String marca, String modelo, String color, int anio) {
+        this(marca, modelo, color, anio, 0, 0.0, TipoVehiculo.SEDAN, "", EstadoVehiculo.DISPONIBLE, null, null);
+    }
+    
+    // Métodos para actualizar el estado del vehículo
+    public void reservarVehiculo(String cliente, String vendedor) {
+        if (this.estado == EstadoVehiculo.DISPONIBLE) {
+            this.cliente = cliente;
+            this.vendedor = vendedor;
+            this.estado = EstadoVehiculo.RESERVADO;
+        } else {
+            throw new IllegalStateException("El vehículo no está disponible para reserva.");
+        }
     }
 
-    public void setAnio(int anio) {
-        this.anio = anio;
+    public void venderVehiculo(String cliente, String vendedor) {
+        if (this.estado == EstadoVehiculo.RESERVADO || this.estado == EstadoVehiculo.DISPONIBLE) {
+            this.cliente = cliente;
+            this.vendedor = vendedor;
+            this.estado = EstadoVehiculo.VENDIDO;
+        } else {
+            throw new IllegalStateException("El vehículo no está disponible para la venta.");
+        }
     }
 
-    public void setCilindraje(int cilindraje) {
-        this.cilindraje = cilindraje;
+    public void cancelarReserva() {
+        if (this.estado == EstadoVehiculo.RESERVADO) {
+            this.cliente = null;
+            this.estado = EstadoVehiculo.DISPONIBLE;
+        } else {
+            throw new IllegalStateException("No hay reserva activa para cancelar.");
+        }
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    // Método para retornar la información del vehículo en formato texto
+    public String aFormatoTexto() {
+        return "Marca: " + marca + "\n" + 
+               "Modelo: " + modelo + "\n" +
+               "Color: " + color + "\n" +
+               "Annio: " + anio + "\n" +
+               "Cilindraje: " + cilindraje + "\n" +
+               "Kilometraje: " + kilometraje + "\n" +
+               "Tipo: " + tipo + "\n" +
+               "Características: " + caracteristicas + "\n" +
+               "Estado: " + estado + "\n" +
+               "Cliente: " + cliente + "\n" +
+               "Vendedor: " + vendedor;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public void setKilometraje(double kilometraje) {
-        this.kilometraje = kilometraje;
-    }
-
-    public void setTipo(TipoVehiculo tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
-
-    // Get
+    // Getters para todos los atributos
     public String getColor() {
         return color;
     }
@@ -126,31 +149,65 @@ public class Vehiculo implements Serializable {
         return vendedor;
     }
 
-    // Métodos adicionales
-    public void reservarVehiculo(String cliente, String vendedor) {
-        if (this.estado == EstadoVehiculo.DISPONIBLE) {
-            this.estado = EstadoVehiculo.RESERVADO;
-            this.cliente = cliente;
-            this.vendedor = vendedor;
-        }
+    // Setters para todos los atributos
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public void venderVehiculo() {
-        if (this.estado == EstadoVehiculo.RESERVADO) {
-            this.estado = EstadoVehiculo.VENDIDO;
-        }
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
-    public void desistirCompra() {
-        if (this.estado == EstadoVehiculo.RESERVADO) {
-            this.estado = EstadoVehiculo.DISPONIBLE;
-            this.cliente = null;
-        }
+    public void setCilindraje(int cilindraje) {
+        this.cilindraje = cilindraje;
     }
 
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setKilometraje(double kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+
+    public void setTipo(TipoVehiculo tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public void setEstado(EstadoVehiculo estado) {
+        this.estado = estado;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    // SIIIIIIIII
     @Override
     public String toString() {
-        return "Marca: " + marca + ", Modelo: " + modelo + ", Color: " + color + ", Año: " + anio;
+        return "Marca:" + marca + "," + 
+               "Modelo:" + modelo + "," +
+               "Color:" + color + "," +
+               "Año:" + anio + "," +
+               "Cilindraje:" + cilindraje + "," +
+               "Kilometraje:" + kilometraje + "," +
+               "Tipo:" + tipo + "," +
+               "Características:" + caracteristicas + "," +
+               "Estado:" + estado + "," +
+               "Cliente:" + (cliente != null ? cliente : "") + "," +
+               "Vendedor:" + (vendedor != null ? vendedor : "");
     }
-
+    
 }
