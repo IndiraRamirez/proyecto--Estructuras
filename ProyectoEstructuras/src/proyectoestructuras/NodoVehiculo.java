@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectoestructuras;
 
 /**
  *
  * @author JeffryCH
  */
+
+package proyectoestructuras;
+
 public class NodoVehiculo {
     private Vehiculo vehiculo;
     private NodoVehiculo siguiente;
@@ -21,12 +20,21 @@ public class NodoVehiculo {
         return vehiculo;
     }
 
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
     public NodoVehiculo getSiguiente() {
         return siguiente;
     }
 
     public void setSiguiente(NodoVehiculo siguiente) {
         this.siguiente = siguiente;
+    }
+
+    @Override
+    public String toString() {
+        return vehiculo.toString();
     }
 }
 
