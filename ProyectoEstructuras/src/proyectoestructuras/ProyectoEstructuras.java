@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
  *
  * 
  */
-
 public class ProyectoEstructuras {
 
     public static void main(String[] args) throws IOException {
@@ -23,6 +22,7 @@ public class ProyectoEstructuras {
         ManejoArchivos logins = new ManejoArchivos();
 
         String[] opcionesM = {"Iniciar sesion Master", "Iniciar sesion empleado", "Informacion", "Salir"};
+        m.Cargar();
         int comprobarAR = logins.ComprobarAR();
         if (comprobarAR == 2) {
             JOptionPane.showMessageDialog(null, "Agregue un usuario master");
@@ -60,6 +60,7 @@ public class ProyectoEstructuras {
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Cerrando sistema");
+                    m.Guardar();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida. Por favor, seleccione nuevamente.");
@@ -68,5 +69,4 @@ public class ProyectoEstructuras {
         } while (opcion != 3);
     }
 }
-    
 

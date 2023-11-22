@@ -1,38 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectoestructuras;
+
 import java.io.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author indir
- */
-
 public class ManejoArchivos {
 
-    private final String nombreARmaster = "LoginMaestro.txt";
-    private final String nombreARempleado = "LoginEmpleado.txt";
+    private final String nombreARmaster= "LoginMaestro.txt";
+    private final String nombreARempleado= "LoginEmpleado.txt";
+    private final String nombreARClientes = "ListaClientes.txt";
     private final File ARmaster = new File(nombreARmaster);
     private final File ARempleado = new File(nombreARempleado);
+    private final File ARcliente = new File(nombreARClientes);
     private final String nombreARvehiculo = "ListaVehiculo.txt";
     private final File ARvehiculo = new File(nombreARvehiculo);
     
     public int ComprobarAR(){
-        if(ARmaster.exists() || ARempleado.exists() || ARvehiculo.exists()){
+        if(ARmaster.exists() || ARempleado.exists()){
             return 1;
         }else{
             try{
                 ARmaster.createNewFile();
                 ARempleado.createNewFile();
-                ARvehiculo.createNewFile();
                 return 2;
             }catch(IOException e){
-                System.out.println("Hubo un error creando el archivo.\nError: "+e.getMessage());
-                return 3;
-            }
+            System.out.println("Hubo un error creando el archivo.\nError: "+e.getMessage());
+            return 3;}
         }
     }
     
@@ -47,13 +39,12 @@ public class ManejoArchivos {
                 if(linea.equals(comprobarCT)){
                     br.close();
                     return true;
-                }
-            }
+                }}
         }
         br.close();
         return false;
     }
-
+    
     public boolean ComprobarEMPLEADO(String nombre, String contra) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(ARempleado));
         String linea;
@@ -65,9 +56,7 @@ public class ManejoArchivos {
                 if(linea.equals(comprobarCT)){
                     br.close();
                     return true;
-                }
-            }
-        }
+                }}}
         br.close();
         return false;
     }
@@ -82,7 +71,7 @@ public class ManejoArchivos {
                 datosArchivo+="\n";
             }
         }catch(IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al leer el archivo: " + e.getMessage());
         }
         
         String datosClienteNuevo = "Nombre:" + nombre +"\nContrasenna:"+ contra + "\n\n";
@@ -107,7 +96,7 @@ public class ManejoArchivos {
                 datosArchivo+="\n";
             }
         }catch(IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al leer el archivo: " + e.getMessage());
         }
         
         String datosClienteNuevo = "Nombre:" + nombre +"\nContrasenna:"+ contra + "\n\n";
@@ -121,6 +110,31 @@ public class ManejoArchivos {
             JOptionPane.showMessageDialog(null, "Error al escribir en el archivo: " + e.getMessage());
         }
     }
+    
+    public void EscribirArchivo(ListaCliente lista){
+        StringBuilder datoArchivo = new StringBuilder();
+        try{
+            NodoCliente aux = lista.getCabeza();
+            while(aux!=null){
+                datoArchivo.append("Nombre:").append(aux.getPersona().getNombre());
+                datoArchivo.append("\nApellidos:").append(aux.getPersona().getApellido());
+                datoArchivo.append("\nEdad:").append(aux.getPersona().getEdad());
+                datoArchivo.append("\nID:").append(aux.getPersona().getId());
+                datoArchivo.append("\nTelefono:").append(aux.getPersona().getNumeroTel());
+                datoArchivo.append("\nCorreo:").append(aux.getPersona().getCorreo());
+                datoArchivo.append("\n\n");
+                aux = aux.getSiguiente();}
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al leer el archivo.\n"+e.getMessage());
+            }
+        try{
+            BufferedWriter escribir = new BufferedWriter(new FileWriter(ARcliente));
+            escribir.write(datoArchivo.toString());
+            escribir.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al leer el archivo.\n"+e.getMessage());
+        }
+    }
 
     // Método para agregar un vehículo al archivo sin sobrescribir los existentes
     public void guardarVehiculo(Vehiculo vehiculo) {
@@ -130,6 +144,35 @@ public class ManejoArchivos {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al archivar en el archivo: " + ex.getMessage());
         }
+    }
+    
+    public void cargarAR(ListaCliente lista, Customer contar) throws FileNotFoundException, IOException{
+        BufferedReader br = new BufferedReader(new FileReader(ARcliente));
+        String linea = "";
+        while((linea = br.readLine())!=null){
+            String nombre = linea.substring(7).trim();
+            linea = br.readLine();
+            
+            String apellidos = linea.substring(10).trim();
+            linea = br.readLine();
+            
+            int edad = Integer.parseInt(linea.substring(5).trim());
+            linea = br.readLine();
+            
+            int id = Integer.parseInt(linea.substring(3).trim());
+            linea = br.readLine();
+            
+            int numero = Integer.parseInt(linea.substring(9).trim());
+            linea = br.readLine();
+            
+            String correo = linea.substring(7).trim();
+            linea = br.readLine();
+            
+            Customer persona = new Customer(nombre, apellidos, edad, id, numero, correo);
+            contar.numeroClientesRegistrados();
+            lista.agregarPersonaOrdenado(persona);
+        }
+        br.close();
     }
 
     // Método para modificar un vehículo en el archivo
@@ -218,6 +261,5 @@ public class ManejoArchivos {
     }
     
 }
- 
  
 

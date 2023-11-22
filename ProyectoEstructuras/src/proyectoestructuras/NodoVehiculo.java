@@ -1,12 +1,5 @@
 package proyectoestructuras;
 
-/**
- *
- * @author JeffryCH
- */
-
-package proyectoestructuras;
-
 public class NodoVehiculo {
     private Vehiculo vehiculo;
     private NodoVehiculo siguiente;
@@ -37,4 +30,5 @@ public class NodoVehiculo {
         return vehiculo.toString();
     }
 }
+
 

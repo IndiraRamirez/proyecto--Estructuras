@@ -14,20 +14,19 @@ import javax.swing.JOptionPane;
  * @author indir
  * @author jeffry
  */
-
 public class Menu {
     Customer p = new Customer();
     ListaCliente lista = new ListaCliente();
     Configuracion conf = new Configuracion();
     ManejoArchivos m = new ManejoArchivos();
     private ListaDeVehiculos listaDeVehiculos = new ListaDeVehiculos();
-
+    
     public void Menu_UsuarioGlobal() throws IOException {
         int opcion;
         do {
             String opciones[] = {
                 "1. Crear usuario", "2. Crear vehiculo", "3. Ver Usuarios",
-                "4. Ver lista cliente", "5. Eliminar usuario",
+                "4. Ver clientes", "5. Eliminar usuario",
                 "6. Consultar reportes", "7. Informacion", "0. Salir del sistema"
             };
 
@@ -116,10 +115,10 @@ public class Menu {
         do {
             String opciones[] = new String[8];
             opciones[0] = "1. Actualizar estado de vehiculos";
-            opciones[1] = "2. Ver lista vehiculos";
-            opciones[2] = "3. Crear lista cliente";
-            opciones[3] = "4. Ver lista cliente";
-            opciones[4] = "5. Consultar garantia vehiculo";
+            opciones[1] = "2. Ver lista de vehiculos";
+            opciones[2] = "3. Crear usuario para cliente";
+            opciones[3] = "4. Ver lista de clientes";
+            opciones[4] = "5. Consultar garantia de un vehiculo";
             opciones[5] = "6. Buscar vehiculo";
             opciones[6] = "7. Informacion";
             opciones[7] = "0. Salir del sistema";
@@ -329,5 +328,12 @@ public class Menu {
 
     return vendedorSeleccionado;
 }
+    
+    public void Cargar() throws IOException{
+        m.cargarAR(lista, p);
+    }
+    public void Guardar(){
+        m.EscribirArchivo(lista);
+    }
 
 } 

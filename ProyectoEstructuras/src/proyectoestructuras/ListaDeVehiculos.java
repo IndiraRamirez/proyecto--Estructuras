@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectoestructuras;
-import proyectoestructuras.Vehiculo.EstadoVehiculo;
+
 import java.io.*;
 
-/**
- *
- * @author JeffryCH
- */
-
+import proyectoestructuras.Vehiculo.EstadoVehiculo;
 
 public class ListaDeVehiculos {
     private NodoVehiculo cabeza;
@@ -230,4 +222,3 @@ public class ListaDeVehiculos {
         return modelos;
     }
 }
-  
