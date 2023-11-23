@@ -108,7 +108,6 @@ public class Menu {
                             + "Por favor, seleccione nuevamente.");}
         }while(opcion != 7);   
     }
-     Customer c= new Customer();
     public void Menu_Empleado(){
         
           int opcion;
