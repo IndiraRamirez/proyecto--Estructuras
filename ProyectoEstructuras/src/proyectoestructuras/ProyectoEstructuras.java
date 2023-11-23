@@ -22,7 +22,6 @@ public class ProyectoEstructuras {
         ManejoArchivos logins = new ManejoArchivos();
 
         String[] opcionesM = {"Iniciar sesion Master", "Iniciar sesion empleado", "Informacion", "Salir"};
-        m.Cargar();
         int comprobarAR = logins.ComprobarAR();
         if (comprobarAR == 2) {
             JOptionPane.showMessageDialog(null, "Agregue un usuario master");
@@ -30,6 +29,7 @@ public class ProyectoEstructuras {
             String contra = JOptionPane.showInputDialog("Escriba una contrasenna");
             logins.AgregarUM(nombre, contra);
         }
+        m.Cargar();
 
         int opcion;
         do {

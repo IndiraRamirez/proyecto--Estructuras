@@ -15,12 +15,13 @@ public class ManejoArchivos {
     private final File ARvehiculo = new File(nombreARvehiculo);
     
     public int ComprobarAR(){
-        if(ARmaster.exists() || ARempleado.exists()){
+        if(ARmaster.exists() && ARempleado.exists() && ARcliente.exists()){
             return 1;
         }else{
             try{
                 ARmaster.createNewFile();
                 ARempleado.createNewFile();
+                ARcliente.createNewFile();
                 return 2;
             }catch(IOException e){
             System.out.println("Hubo un error creando el archivo.\nError: "+e.getMessage());
