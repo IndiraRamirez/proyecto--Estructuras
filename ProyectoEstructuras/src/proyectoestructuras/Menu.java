@@ -27,7 +27,7 @@ public class Menu {
             String opciones[] = {
                 "1. Crear usuario", "2. Crear vehiculo", "3. Ver Usuarios",
                 "4. Ver clientes", "5. Eliminar usuario",
-                "6. Consultar reportes", "7. Informacion", "0. Salir del sistema"
+                "6. Consultar reportes", "7. Garantia Vehiculo","8. Informacion", "0. Salir del sistema"
             };
 
             Object seleccion = JOptionPane.showInputDialog(
@@ -97,10 +97,13 @@ public class Menu {
                            }default->
                                 JOptionPane.showMessageDialog(null, "Opción inválida. "
                                 + "Por favor, seleccione nuevamente.");
-                        }     
-                }case 6 ->{
-                     JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
+                        } 
+                }case 6 ->{   
+                    modificarGrafo;
+                    break      
                 }case 7 ->{
+                     JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
+                }case 8 ->{
                     JOptionPane.showMessageDialog(null, "¡Hasta luego!");
                      break; 
                 }default ->
@@ -334,5 +337,24 @@ public class Menu {
     public void Guardar(){
         m.EscribirArchivo(lista);
     }
+
+    public void modificarGrafo() {
+        Grafo grafo = new Grafo(); // Debería ser una instancia compartida en tu aplicación
+        String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
+        String tipoVehiculo = JOptionPane.showInputDialog("Ingrese el tipo de vehículo para " + marca + ":");
+        grafo.agregarNodo(tipoVehiculo);
+
+        double cashback = Double.parseDouble(JOptionPane.showInputDialog("Ingrese % de cashback para " + tipoVehiculo + ":"));
+        int kmGarantia = Integer.parseInt(JOptionPane.showInputDialog("Ingrese km de garantía para " + tipoVehiculo + ":"));
+        int cantMantenimientosGratis = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de mantenimientos gratis para " + tipoVehiculo + ":"));
+
+        Promocion promocion = new Promocion(cashback, kmGarantia, cantMantenimientosGratis);
+        // Suponiendo que "destino" es otro nodo/tipo de vehículo que ya existe
+        String destino = JOptionPane.showInputDialog("Ingrese el tipo de vehículo relacionado:");
+        grafo.agregarArista(tipoVehiculo, destino, promocion);
+
+        JOptionPane.showMessageDialog(null, "Promoción agregada correctamente al grafo para " + tipoVehiculo);
+    }
+
 
 } 
