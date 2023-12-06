@@ -1,6 +1,7 @@
 package proyectoestructuras;
 
 import java.io.*;
+import javax.swing.JOptionPane;
 
 import proyectoestructuras.Vehiculo.EstadoVehiculo;
 
@@ -221,4 +222,48 @@ public class ListaDeVehiculos {
 
         return modelos;
     }
+    int cantidadCompraronV=0;
+     public int calcularCantidadVendidos() {
+        NodoVehiculo actual = cabeza;
+        while (actual != null) {
+         
+            if (actual.getVehiculo().getEstado() == Vehiculo.EstadoVehiculo.VENDIDO) {
+                cantidadCompraronV = cantidadCompraronV + 1;
+            }
+            actual = actual.getSiguiente();
+        }
+        return cantidadCompraronV;
+    }
+
+     
+     int cantidadReservadoV=0;
+     
+    public int calcularCantidadReservado() {
+        NodoVehiculo actual = cabeza;
+        while (actual != null) {
+            if (actual.getVehiculo().getEstado() == Vehiculo.EstadoVehiculo.RESERVADO) {
+                cantidadReservadoV = cantidadReservadoV + 1;
+            }
+            actual = actual.getSiguiente();
+        }
+        return cantidadReservadoV;
+    }
+    int cantidadDisponibleV=0;
+    public int calcularCantidadDisponibles() {
+        NodoVehiculo actual = cabeza;
+        while (actual != null) {
+            if (actual.getVehiculo().getEstado() == Vehiculo.EstadoVehiculo.DISPONIBLE) {
+                cantidadDisponibleV = cantidadDisponibleV+ 1;
+            }
+            actual = actual.getSiguiente();
+        }
+        return cantidadDisponibleV;
+    }
+    public void reporteVehiculo(int cantidadCompraronV,int cantidadReservadoV,int cantidadDisponibleV) {
+        JOptionPane.showMessageDialog(null, 
+                "La cantidad de clientes con vehículos comprados son " + cantidadCompraronV + "\n"
+                + "La cantidad de clientes con vehículos reservados son " + cantidadReservadoV + "\n"
+                + "La cantidad de clientes con vehículos disponibles son " + cantidadDisponibleV+ "\n");
+    }
+      
 }
