@@ -1,6 +1,7 @@
 package proyectoestructuras;
 
 import java.io.*;
+import java.util.List;
 
 import proyectoestructuras.Vehiculo.EstadoVehiculo;
 
@@ -221,4 +222,5 @@ public class ListaDeVehiculos {
 
         return modelos;
     }
+
 }

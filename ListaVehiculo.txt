@@ -1,0 +1,1 @@
+Marca:Checrolet,Modelo:Trax,Color:2017,Año:2017,Cilindraje:1300,Kilometraje:80000.0,Tipo:SUV,Características:si,Estado:DISPONIBLE,Cliente:,Vendedor:

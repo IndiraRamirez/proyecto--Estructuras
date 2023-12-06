@@ -1,0 +1,2 @@
+Marca:chevrolet,Modelo:trax,Color:negro,Año:2018,Cilindraje:1800,Kilometraje:50000.0,Tipo:SUV,Características:4 puertas,Estado:DISPONIBLE,Cliente:,Vendedor:
+Marca:Toyota,Modelo:Corola,Color:amarillo,Año:1200,Cilindraje:800,Kilometraje:20000.0,Tipo:SEDAN,Características:si,Estado:DISPONIBLE,Cliente:,Vendedor:

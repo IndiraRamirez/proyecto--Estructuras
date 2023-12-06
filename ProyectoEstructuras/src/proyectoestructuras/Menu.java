@@ -99,8 +99,8 @@ public class Menu {
                                 + "Por favor, seleccione nuevamente.");
                         } 
                 }case 6 ->{   
-                    modificarGrafo;
-                    break      
+                    //mostrarMenuDeGarantias();
+                         
                 }case 7 ->{
                      JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
                 }case 8 ->{
@@ -111,6 +111,7 @@ public class Menu {
                             + "Por favor, seleccione nuevamente.");}
         }while(opcion != 7);   
     }
+
     public void Menu_Empleado(){
         
           int opcion;
@@ -149,20 +150,26 @@ public class Menu {
                 }
                     
                 case 1 -> {
+                    java.awt.EventQueue.invokeLater(new Runnable(){
+                        public void run(){
+                            new frmVehiculolista().setVisible(true);
+                            
+                        }
+                    
                     // Limpia la lista actual
-                    listaDeVehiculos.limpiarLista();
+                    //listaDeVehiculos.limpiarLista();
                     
                     // Carga los vehículos desde el archivo
-                    listaDeVehiculos.cargarDesdeArchivo();
+                    //listaDeVehiculos.cargarDesdeArchivo();
                     
                     // Obtiene la lista de vehículos
-                    String vehiculosStr = listaDeVehiculos.listarVehiculos();
+                    //String vehiculosStr = listaDeVehiculos.listarVehiculos();
                     
-                    if (vehiculosStr == null || vehiculosStr.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "No hay vehículos registrados.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
-                    }   
+                    //if (vehiculosStr == null || vehiculosStr.isEmpty()) {
+                    //    JOptionPane.showMessageDialog(null, "No hay vehículos registrados.");
+                    //} else {
+                    //    JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
+                    }  ); 
                 }case 2 -> {
                     //El programa debe permitir la creación de clientes.
                   String correo="";
@@ -338,23 +345,13 @@ public class Menu {
         m.EscribirArchivo(lista);
     }
 
-    public void modificarGrafo() {
-        Grafo grafo = new Grafo(); // Debería ser una instancia compartida en tu aplicación
-        String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
-        String tipoVehiculo = JOptionPane.showInputDialog("Ingrese el tipo de vehículo para " + marca + ":");
-        grafo.agregarNodo(tipoVehiculo);
-
-        double cashback = Double.parseDouble(JOptionPane.showInputDialog("Ingrese % de cashback para " + tipoVehiculo + ":"));
-        int kmGarantia = Integer.parseInt(JOptionPane.showInputDialog("Ingrese km de garantía para " + tipoVehiculo + ":"));
-        int cantMantenimientosGratis = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de mantenimientos gratis para " + tipoVehiculo + ":"));
-
-        Promocion promocion = new Promocion(cashback, kmGarantia, cantMantenimientosGratis);
-        // Suponiendo que "destino" es otro nodo/tipo de vehículo que ya existe
-        String destino = JOptionPane.showInputDialog("Ingrese el tipo de vehículo relacionado:");
-        grafo.agregarArista(tipoVehiculo, destino, promocion);
-
-        JOptionPane.showMessageDialog(null, "Promoción agregada correctamente al grafo para " + tipoVehiculo);
-    }
-
+    //private void mostrarMenuDeGarantias() {
+      //  String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
+        //if (marca != null && !marca.isEmpty()) {
+          //  grafo.mostrarPromociones(marca);
+        //} else {
+          //  JOptionPane.showMessageDialog(null, "No se ingresó una marca válida.");
+        //}
+    //}
 
 } 

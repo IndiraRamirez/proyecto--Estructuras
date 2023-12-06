@@ -11,6 +11,7 @@ public class Promocion {
         this.cantMantenimientosGratis = cantMantenimientosGratis;
     }
 
+    // Getters y Setters
     public double getCashback() {
         return cashback;
     }

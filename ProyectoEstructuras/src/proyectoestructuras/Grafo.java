@@ -1,63 +1,75 @@
 package proyectoestructuras;
 
-import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+import javax.swing.JOptionPane;
 
 public class Grafo {
-    private Map<String, Nodo> nodos;
+    private HashMap<String, HashMap<String, Promocion>> grafo;
 
     public Grafo() {
-        nodos = new HashMap<>();
+        this.grafo = new HashMap<>();
     }
 
-    public void agregarNodo(String tipoVehiculo) {
-        if (!nodos.containsKey(tipoVehiculo)) {
-            nodos.put(tipoVehiculo, new Nodo(tipoVehiculo));
+    public void leerArchivoYCrearGrafo(String nombreArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Marca, Tipo, %Cashback, KmGarantia, MantenimientosGratis
+                String[] data = line.split(",");
+                String marca = data[0].trim();
+                String tipo = data[1].trim();
+                double cashback = Double.parseDouble(data[2].trim());
+                int kmGarantia = Integer.parseInt(data[3].trim());
+                int mantenimientosGratis = Integer.parseInt(data[4].trim());
+
+                this.agregarPromocion(marca, tipo, new Promocion(cashback, kmGarantia, mantenimientosGratis));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void agregarArista(String origen, String destino, Promocion promocion) {
-        if (nodos.containsKey(origen) && nodos.containsKey(destino)) {
-            Nodo nodoOrigen = nodos.get(origen);
-            Nodo nodoDestino = nodos.get(destino);
-            nodoOrigen.agregarVecino(nodoDestino, promocion);
+    public void agregarPromocion(String marca, String tipo, Promocion promocion) {
+        HashMap<String, Promocion> tipos = grafo.getOrDefault(marca, new HashMap<>());
+        tipos.put(tipo, promocion);
+        grafo.put(marca, tipos);
+    }
+
+    public Promocion obtenerPromocion(String marca, String tipo) {
+        return grafo.getOrDefault(marca, new HashMap<>()).get(tipo);
+    }
+
+    public boolean eliminarPromocion(String marca, String tipo) {
+        HashMap<String, Promocion> tipos = grafo.get(marca);
+        if (tipos != null && tipos.containsKey(tipo)) {
+            tipos.remove(tipo);
+            // Si después de eliminar la promoción no quedan más tipos para la marca, eliminar también la marca.
+            if (tipos.isEmpty()) {
+                grafo.remove(marca);
+            }
+            return true; // Retornar true si la promoción fue eliminada con éxito.
+        }
+        return false; 
+    }    
+
+    public void mostrarPromociones(String marca) {
+        HashMap<String, Promocion> tipos = grafo.get(marca);
+        if (tipos != null) {
+            String sb = new StringBuilder("Promociones para " + marca + ":\n");
+            for (String tipo : tipos.keySet()) {
+                Promocion p = tipos.get(tipo);
+                sb.append(tipo).append(": %Cashback ").append(p.getCashback())
+                  .append(", Km Garantía ").append(p.getKmGarantia())
+                  .append(", Mantenimientos Gratis ").append(p.getCantMantenimientosGratis())
+                  .append("\n");
+            }
+            JOptionPane.showMessageDialog(null, sb.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay promociones disponibles para la marca " + marca);
         }
     }
-
-public void modificarNodo(String tipoVehiculo, String nuevoTipoVehiculo) {
-    if (nodos.containsKey(tipoVehiculo)) {
-        Nodo nodo = nodos.get(tipoVehiculo);
-        nodos.remove(tipoVehiculo);
-        nodo.setTipoVehiculo(nuevoTipoVehiculo);
-        nodos.put(nuevoTipoVehiculo, nodo);
-    }
 }
 
-public void eliminarNodo(String tipoVehiculo) {
-    if (nodos.containsKey(tipoVehiculo)) {
-        Nodo nodo = nodos.get(tipoVehiculo);
-        nodos.remove(tipoVehiculo);
-
-        for (Nodo vecino : nodo.getVecinos()) {
-            vecino.getVecinos().remove(nodo);
-        }
-    }
-}
-
-public void modificarArista(String origen, String destino, Promocion promocion) {
-    if (nodos.containsKey(origen) && nodos.containsKey(destino)) {
-        Nodo nodoOrigen = nodos.get(origen);
-        Nodo nodoDestino = nodos.get(destino);
-        nodoOrigen.modificarVecino(nodoDestino, promocion);
-    }
-}
-
-public void eliminarArista(String origen, String destino) {
-    if (nodos.containsKey(origen) && nodos.containsKey(destino)) {
-        Nodo nodoOrigen = nodos.get(origen);
-        Nodo nodoDestino = nodos.get(destino);
-        nodoOrigen.eliminarVecino(nodoDestino);
-    }
-}
-}
