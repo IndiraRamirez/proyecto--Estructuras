@@ -15,7 +15,6 @@ import static proyectoestructuras.Menu.cantidadReservado;
  */
 public class ListaCliente {
 
-    ManejoArchivos m = new ManejoArchivos();
     private NodoCliente cabeza;
 
     public ListaCliente() {
@@ -47,8 +46,6 @@ public class ListaCliente {
         }
 
     }
-
-    Customer p = new Customer();
 
     // Muestra lista
     public void mostrarPersonas() {
@@ -86,7 +83,7 @@ public class ListaCliente {
         }
 
     }
-
+    // no haya dos id iguales
     public boolean compararId(int id) {
         NodoCliente aux = cabeza;
         boolean bandera = false;// existe un cliente con ese id?
@@ -101,6 +98,7 @@ public class ListaCliente {
         return bandera;//si no existe la condicion es falsa
     }
 
+    //Buscan Usuario para mostrarlo
     public void buscar() {
         NodoCliente aux = cabeza;
         boolean bandera = false;// para saber si lo encontramos
@@ -122,9 +120,11 @@ public class ListaCliente {
             JOptionPane.showMessageDialog(null, "Id no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    //////////////////reportes------------------------------------------------------------------------------------------------------
-
-   
+    
+    
+    
+    ///reportes---
+ 
     
     //1.
     public int calcularCantidadReservado() {

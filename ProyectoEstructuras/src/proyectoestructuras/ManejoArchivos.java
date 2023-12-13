@@ -229,7 +229,8 @@ public class ManejoArchivos {
             JOptionPane.showMessageDialog(null, "Error al archivar en el archivo: " + ex.getMessage());
         }
     }
-
+    
+    //Cargar Lista Clientes
     public void cargarAR(ListaCliente lista) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(ARcliente));
         String linea = "";

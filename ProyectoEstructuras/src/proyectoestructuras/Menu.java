@@ -80,8 +80,7 @@ public class Menu {
                         String contra = JOptionPane.showInputDialog("Escriba una contrasenna para el nuevo usuario");
                         int contadorV = 0;
                         int contadorR = 0;
-                        m.AgregarUE(nombre, contra, contadorR ,contadorV);
-                        lUsuario.agregarUsarioOrdenado(new Usuario(nombre, contra, contadorV, contadorR, id));
+                        m.AgregarUE(nombre, contra, contadorR, contadorV);
 
                     }
                 }
@@ -126,7 +125,7 @@ public class Menu {
                        3.Top 3 de clientes que más compraron vehículos
                        4.Cantidad de vehículos vendidos por vendedor
                        5.Cantidad de vehículos reservados por vendedor
-                       6.Salir                                       """, "Reportes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcionesR, opcionesR[5]);
+                       6.Salir                                       """, "Reportes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcionesR, opcionesR[5]);
                     switch (opcionR) {
                         case 0 -> {
                             int cantidadReservadosV = listaDeVehiculos.calcularCantidadReservado();
@@ -142,14 +141,14 @@ public class Menu {
                                     + "La cantidad de clientes con vehículos reservados son " + cantidadReservado + "\n");
                         }
                         case 2 -> {
-                            
+
                             JOptionPane.showMessageDialog(null, lista.getMayor());
                         }
                         case 3 -> {
                             JOptionPane.showMessageDialog(null, m.getVendedoresV());
                         }
                         case 4 -> {
-                             JOptionPane.showMessageDialog(null,m.getVendedoresR());
+                            JOptionPane.showMessageDialog(null, m.getVendedoresR());
                         }
                         case 5 -> {
                             break;
@@ -210,7 +209,7 @@ public class Menu {
                 }
 
                 case 1 -> {
-                   
+
                     // Obtiene la lista de vehículos
                     String vehiculosStr = listaDeVehiculos.listarVehiculos();
 
@@ -418,7 +417,7 @@ public class Menu {
     public void Cargar() throws IOException {
         m.cargarAR(lista);
         listaDeVehiculos.limpiarLista();
-         listaDeVehiculos.cargarDesdeArchivo();
+        listaDeVehiculos.cargarDesdeArchivo();
 
     }
 

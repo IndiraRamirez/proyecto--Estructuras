@@ -18,16 +18,15 @@ public class Usuario {
     public Usuario() {
     }
 
-    ManejoArchivos m = new ManejoArchivos();
-
-    public Usuario(String nombre, String contra, int contadorV, int contadorR,int id) {
+    public Usuario(String nombre, String contra, int contadorV, int contadorR) {
         this.nombre = nombre;
         this.contra = contra;
         this.contadorV = contadorV;   /// cantidad de carros vendidos
         this.contadorR = contadorR;   ///Cantidad de carros reservados
-        this.id=id;
+        
     }
 
+    ///set´s y get´s
     public int getContadorV() {
         return contadorV;
     }

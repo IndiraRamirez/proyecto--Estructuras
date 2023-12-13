@@ -22,8 +22,7 @@ public class ListaUsuario {
         return cabeza;
     }
 
-    // Agrega personas en lista enlanzada
-    
+   
  
       public boolean compararNombre(String nombre) {
             boolean luz = false;// BOOlean que nos ayuda a encintrar
@@ -39,7 +38,7 @@ public class ListaUsuario {
         return luz;//si no existe la condicion es falsa
     }
     
-    
+    /**
     public void agregarUsarioOrdenado(Usuario usuario) {
         NodoUsuario nuevoNodo = new NodoUsuario(usuario);
        NodoUsuario aux = cabeza;
@@ -54,6 +53,8 @@ public class ListaUsuario {
             aux.setSiguiente(nuevoNodo);
         }
     }
+    **/
+
     
     
 

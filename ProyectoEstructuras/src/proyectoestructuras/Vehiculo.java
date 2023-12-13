@@ -194,7 +194,7 @@ public class Vehiculo {
         this.vendedor = vendedor;
     }
 
-    // SIIIIIIIII
+    
     @Override
     public String toString() {
         return "Marca:" + marca + "," + 
