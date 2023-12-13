@@ -14,69 +14,47 @@ public class ManejoArchivos {
     private final String nombreARvehiculo = "ListaVehiculo.txt";
     private final File ARvehiculo = new File(nombreARvehiculo);
 
-    Customer c = new Customer();
-
-    ///////////////////////////////////////////////////
-    public void eliminarEmpleado(String nombre) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(ARempleado));
-        StringBuilder datosArchivo = new StringBuilder();
-        String linea;
-        boolean clienteEncontrado = false;
-        String eliminar_nombre = "Correo:" + nombre;
-
-        linea = br.readLine();
-        while (linea != null) {
-            if (linea.equals(eliminar_nombre)) {
-                clienteEncontrado = true;
-                linea = br.readLine();
-                while (!(linea.contains("Correo"))) {
-                    linea = br.readLine();
-                    if (linea == null) {
-                        break;
-                    }
-                    if (linea.contains("Correo")) {
-                        datosArchivo.append(linea).append("\n");
-                    }
-                }
-            } else {
-                datosArchivo.append(linea).append("\n");
-            }
-            linea = br.readLine();
-        }
-        br.close();
-        if (clienteEncontrado) {
-            try {
-                BufferedWriter escribir = new BufferedWriter(new FileWriter(ARempleado));
-                escribir.write(datosArchivo.toString());
-                JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
-                escribir.close();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Error al escribir en el archivo: " + e.getMessage());
-            }
+    public int ComprobarAR() {
+        if (ARmaster.exists() && ARempleado.exists() && ARcliente.exists()) {
+            return 1;
         } else {
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado en la base de datos.");
+            try {
+                if (!ARmaster.exists()) {
+                    ARmaster.createNewFile();
+                }
+                if (!ARempleado.exists()) {
+                    ARempleado.createNewFile();
+                }
+                if (!ARcliente.exists()) {
+                    ARcliente.createNewFile();
+                }
+                if (!ARvehiculo.exists()) {
+                    ARvehiculo.createNewFile();
+                }
+                return 2;
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Hubo un error creando el archivo.\nError: " + e.getMessage());
+                return 3;
+            }
         }
     }
 
-    public void mostrarUsuarios() {
-        StringBuilder usuarios = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(ARempleado));
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                if (linea.contains("Correo:")) {
-                    usuarios.append(linea);
-                    usuarios.append("\n");
+    public boolean ComprobarMASTER(String nombre, String contra) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(ARmaster));
+        String linea;
+        String comprobarNB = "Correo:" + nombre;
+        String comprobarCT = "Contrasenna:" + contra;
+        while ((linea = br.readLine()) != null) {
+            if (linea.equals(comprobarNB)) {
+                linea = br.readLine();
+                if (linea.equals(comprobarCT)) {
+                    br.close();
+                    return true;
                 }
             }
-            if (usuarios.equals(null)) {
-                JOptionPane.showMessageDialog(null, "El archivo no tiene usuarios");
-            } else {
-                JOptionPane.showMessageDialog(null, usuarios.toString());
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Hubo un error al leer el archivo");
         }
+        br.close();
+        return false;
     }
 
     public boolean ComprobarEMPLEADO(String nombre, String contra) throws FileNotFoundException, IOException {
@@ -122,7 +100,48 @@ public class ManejoArchivos {
         }
     }
 
-    public void AgregarUE(String nombre, String contra) throws IOException {
+    public void eliminarEmpleado(String nombre) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(ARempleado));
+        StringBuilder datosArchivo = new StringBuilder();
+        String linea;
+        boolean clienteEncontrado = false;
+        String eliminar_nombre = "Correo:" + nombre;
+
+        linea = br.readLine();
+        while (linea != null) {
+            if (linea.equals(eliminar_nombre)) {
+                clienteEncontrado = true;
+                linea = br.readLine();
+                while (!(linea.contains("Correo"))) {
+                    linea = br.readLine();
+                    if (linea == null) {
+                        break;
+                    }
+                    if (linea.contains("Correo")) {
+                        datosArchivo.append(linea).append("\n");
+                    }
+                }
+            } else {
+                datosArchivo.append(linea).append("\n");
+            }
+            linea = br.readLine();
+        }
+        br.close();
+        if (clienteEncontrado) {
+            try {
+                BufferedWriter escribir = new BufferedWriter(new FileWriter(ARempleado));
+                escribir.write(datosArchivo.toString());
+                JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
+                escribir.close();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al escribir en el archivo: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado en la base de datos.");
+        }
+    }
+
+    public void AgregarUE(String nombre, String contra, int contadorR, int contadorV) throws IOException {
         String datosArchivo = "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(ARempleado));
@@ -135,7 +154,7 @@ public class ManejoArchivos {
             JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + e.getMessage());
         }
 
-        String datosClienteNuevo = "Correo:" + nombre + "\nContrasenna:" + contra + "\n\n";
+        String datosClienteNuevo = "Correo:" + nombre + "\nContrasenna:" + contra + "\nContadorR:" + contadorR + "\nContadorV:" + contadorV + "\n\n";
         datosArchivo += datosClienteNuevo;
         try {
             BufferedWriter escribir = new BufferedWriter(new FileWriter(ARempleado));
@@ -145,47 +164,6 @@ public class ManejoArchivos {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al escribir en el archivo: " + e.getMessage());
         }
-    }
-
-    public int ComprobarAR() {
-        if (ARmaster.exists() && ARempleado.exists() && ARcliente.exists()) {
-            return 1;
-        } else {
-            try {
-                if (!ARmaster.exists()) {
-                    ARmaster.createNewFile();
-                }
-                if (!ARempleado.exists()) {
-                    ARempleado.createNewFile();
-                }
-                if (!ARcliente.exists()) {
-                    ARcliente.createNewFile();
-                }
-                return 2;
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Hubo un error creando el archivo.\nError: " + e.getMessage());
-                return 3;
-            }
-        }
-    }
-
-    ///////////////////////////////////////////////////////////
-    public boolean ComprobarMASTER(String nombre, String contra) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(ARmaster));
-        String linea;
-        String comprobarNB = "Nombre:" + nombre;
-        String comprobarCT = "Contrasenna:" + contra;
-        while ((linea = br.readLine()) != null) {
-            if (linea.equals(comprobarNB)) {
-                linea = br.readLine();
-                if (linea.equals(comprobarCT)) {
-                    br.close();
-                    return true;
-                }
-            }
-        }
-        br.close();
-        return false;
     }
 
     public void EscribirArchivo(ListaCliente lista) {
@@ -199,9 +177,34 @@ public class ManejoArchivos {
                 datoArchivo.append("\nID:").append(aux.getPersona().getId());
                 datoArchivo.append("\nTelefono:").append(aux.getPersona().getNumeroTel());
                 datoArchivo.append("\nCorreo:").append(aux.getPersona().getCorreo());
-                datoArchivo.append("\nCantidad Vehiculos:").append(aux.getPersona().getCantidadV());
-                datoArchivo.append("\nReservado:").append(aux.getPersona().getReservado());
-                datoArchivo.append("\nComprado:").append(aux.getPersona().getCompro());
+                datoArchivo.append("\nCantidadDeVehiculos:").append(aux.getPersona().getCantidadV());
+                datoArchivo.append("\nReservado:").append(aux.getPersona().isReservado());
+                datoArchivo.append("\nComprado:").append(aux.getPersona().comprado());
+                datoArchivo.append("\n\n");
+                aux = aux.getSiguiente();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al leer el archivo.\n" + e.getMessage());
+        }
+        try {
+            BufferedWriter escribir = new BufferedWriter(new FileWriter(ARcliente));
+            escribir.write(datoArchivo.toString());
+            escribir.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al leer el archivo.\n" + e.getMessage());
+        }
+    }
+
+    public void ActualizarUsuario(ListaUsuario lista) {
+        StringBuilder datoArchivo = new StringBuilder();
+        try {
+            NodoUsuario aux = lista.getCabeza();
+            while (aux != null) {
+                datoArchivo.append("Correo:").append(aux.getUsuario().getNombre());
+                datoArchivo.append("\nContrasenna:").append(aux.getUsuario().getContrasenna());
+                datoArchivo.append("\nContadorR:").append(aux.getUsuario().getContadorR());
+                datoArchivo.append("\nContadorV:").append(aux.getUsuario().getContadorV());
+
                 datoArchivo.append("\n\n");
                 aux = aux.getSiguiente();
             }
@@ -222,16 +225,6 @@ public class ManejoArchivos {
         String vehiculoString = vehiculo.toString();
         try (PrintWriter salida = new PrintWriter(new FileWriter(nombreARvehiculo, true))) {
             salida.println(vehiculoString);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error al archivar en el archivo: " + ex.getMessage());
-        }
-    }
-
-    ////////////////// guardar usuarios 
-    public void guardaUsuario(Usuario usuario) {
-        String usuarioString = usuario.toString();
-        try (PrintWriter salida = new PrintWriter(new FileWriter(nombreARempleado, true))) {
-            salida.println(usuarioString);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al archivar en el archivo: " + ex.getMessage());
         }
@@ -259,22 +252,21 @@ public class ManejoArchivos {
             String correo = linea.substring(7).trim();
             linea = br.readLine();
 
-            int cantidadV = Integer.parseInt(linea.substring(19).trim());
+            int CantidadDeVehiculos = Integer.parseInt(linea.substring(20).trim());
             linea = br.readLine();
 
-            boolean reservado = Boolean.parseBoolean(linea.substring(9).trim());
+            boolean reservado = Boolean.parseBoolean(linea.substring(10).trim());
             linea = br.readLine();
 
             boolean comprado = Boolean.parseBoolean(linea.substring(9).trim());
             linea = br.readLine();
 
-            Customer persona = new Customer(nombre, apellidos, edad, id, numero, correo, cantidadV, reservado, comprado);
+            Customer persona = new Customer(nombre, apellidos, edad, id, numero, correo, CantidadDeVehiculos, reservado, comprado);
 
             lista.agregarPersonaOrdenado(persona);
             lista.ContarClientes();
-            c.getCantidadV();
-            
-            //lista.reporteCliente();
+            lista.calcularCantidadComprado();
+            lista.calcularCantidadReservado();
         }
         br.close();
     }
@@ -363,22 +355,100 @@ public class ManejoArchivos {
             System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
-    
-    
-    public boolean ComprobarID(String nombre) throws FileNotFoundException, IOException {
+
+    public void mostrarUsuarios() {
+        StringBuilder usuarios = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(ARempleado));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains("Correo:")) {
+                    usuarios.append(linea);
+                    usuarios.append("\n");
+                }
+            }
+            if (usuarios.equals(null)) {
+                JOptionPane.showMessageDialog(null, "El archivo no tiene usuarios");
+            } else {
+                JOptionPane.showMessageDialog(null, usuarios.toString());
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al leer el archivo");
+        }
+    }
+
+    public boolean ComprobarNombre(String nombre) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(ARempleado));
         String linea;
-        while((linea = br.readLine())!=null) {
-            if(linea.startsWith("Correo:")) {
-                String arrSplit[]= linea.split(":",8 );
+        while ((linea = br.readLine()) != null) {
+            if (linea.startsWith("Correo:")) {
+                String arrSplit[] = linea.split(":", 8);
                 String nombrebuscar = arrSplit[1].trim();
                 if (nombrebuscar.equals(nombre)) {
                     br.close();
                     return true;
-                }}}
+
+                }
+            }
+        }
         br.close();
         return false;
     }
 
+    public String getVendedoresV() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(ARempleado));
+            String linea = "";
+            StringBuilder guardar = new StringBuilder();
+            while ((linea = br.readLine()) != null) {
+                String nombre = linea.substring(7).trim();
+                linea = br.readLine();
+
+                linea = br.readLine();
+
+                int carrosV = Integer.parseInt(linea.substring(10).trim());
+                linea = br.readLine();
+
+                int carrosR = Integer.parseInt(linea.substring(10).trim());
+                linea = br.readLine();
+
+                guardar.append("Correo: ").append(nombre);
+                guardar.append("\nCarros vendidos: ").append(carrosV);
+                guardar.append("\n----------------------------------------------------\n");
+            }
+            br.close();
+            return guardar.toString();
+        } catch (Exception e) {
+            return "Hubo un error al leer el archivo" + e.getMessage();
+        }
+    }
+
+    public String getVendedoresR() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(ARempleado));
+            String linea = "";
+            StringBuilder guardar = new StringBuilder();
+            while ((linea = br.readLine()) != null) {
+                String nombre = linea.substring(7).trim();
+                linea = br.readLine();
+
+                linea = br.readLine();
+
+                int carrosV = Integer.parseInt(linea.substring(10).trim());
+                linea = br.readLine();
+
+                int carrosR = Integer.parseInt(linea.substring(10).trim());
+                linea = br.readLine();
+
+                guardar.append("Correo: ").append(nombre);
+                guardar.append("\nCarros reservados: ").append(carrosR);
+                guardar.append("\n----------------------------------------------------\n");
+            }
+            br.close();
+            return guardar.toString();
+        } catch (Exception e) {
+            return "Hubo un error al leer el archivo";
+        }
+    }
 
 }

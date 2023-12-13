@@ -3,11 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyectoestructuras;
-
 import javax.swing.JOptionPane;
 
-//import static proyectoestructuras.Menu.cantidadCompraron;
-//import static proyectoestructuras.Menu.cantidadReservado;
+
 /**
  *
  * @author indir
@@ -27,20 +25,16 @@ public class ListaUsuario {
     // Agrega personas en lista enlanzada
     
  
-      public boolean compararId(String nombre) {
-            boolean luz = false;
+      public boolean compararNombre(String nombre) {
+            boolean luz = false;// BOOlean que nos ayuda a encintrar
         NodoUsuario aux = cabeza;
-        // existe un cliente con ese id?
-        while (aux != null) {
+        while (aux != null) {   //mientras que no este vacio
             if (aux.getUsuario().getNombre().equals(nombre)){ //lo busca
-                JOptionPane.showMessageDialog(null, "Ya existe un cliente con ese nombre");
+                JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre");
                 luz = true;//la condicion cambia
                 return luz;
-               
             }
             aux = aux.getSiguiente();
-            
-       
        }
         return luz;//si no existe la condicion es falsa
     }
@@ -62,6 +56,7 @@ public class ListaUsuario {
     }
     
     
+
     
     
 
@@ -71,11 +66,12 @@ public class ListaUsuario {
 
         while (aux != null) {
             if (aux.getUsuario().getContadorV() != 0) {
-                r += aux.getUsuario().getNombre() + aux.getUsuario().getContadorV() + "\n";
+                r += "Nombre:"+aux.getUsuario().getNombre() + ""+aux.getUsuario().getContadorV() + "\n";
      
             }
+            aux = aux.getSiguiente();
         }
-         aux = aux.getSiguiente();
+         
             return r;
         }
     
@@ -120,7 +116,7 @@ public class ListaUsuario {
             if (vendedor.equals(aux.getUsuario().nombre)) { //lo busca si lo encuentra muestra los datos
 
                 bandera = true; //lo encontro
-                aux.getUsuario().setContadorV(+1);
+                aux.getUsuario().setContadorV(aux.getUsuario().getContadorV()+1);
                 break;
             }
             aux = aux.getSiguiente();

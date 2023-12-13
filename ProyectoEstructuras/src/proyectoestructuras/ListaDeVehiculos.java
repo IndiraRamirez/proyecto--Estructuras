@@ -248,6 +248,7 @@ public class ListaDeVehiculos {
         }
         return cantidadReservadoV;
     }
+    
     int cantidadDisponibleV=0;
     public int calcularCantidadDisponibles() {
         NodoVehiculo actual = cabeza;
@@ -259,6 +260,7 @@ public class ListaDeVehiculos {
         }
         return cantidadDisponibleV;
     }
+    
     public void reporteVehiculo(int cantidadCompraronV,int cantidadReservadoV,int cantidadDisponibleV) {
         JOptionPane.showMessageDialog(null, 
                 "La cantidad de clientes con vehículos comprados son " + cantidadCompraronV + "\n"

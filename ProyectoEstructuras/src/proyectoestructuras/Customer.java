@@ -6,27 +6,40 @@ package proyectoestructuras;
 
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author indir
  */
 public class Customer {
-    public String nombre,apellido,correo;
-     public int  edad,id, numeroTel,numCliente;
-     
+
+    public String nombre, apellido, correo;
+    public int edad, id, numeroTel, numCliente, cantidadV;
+    public boolean comprado, reservado;
+    
     Customer() {
-      }
-    public Customer(String nombre, String apellido, int edad, int id, int numeroTel, String correo) {
+    }
+
+    public Customer(String nombre, String apellido, int edad, int id, int numeroTel, String correo, int cantidadV, boolean reservado, boolean comprado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.edad = edad;
         this.id = id;
         this.numeroTel = numeroTel;
+        this.comprado = comprado;
+        this.reservado =reservado;
+        this.cantidadV = cantidadV;
     }
 
- 
+    public int getCantidadV() {
+        return cantidadV;
+    }
+
+    public void setCantidadV(int cantidadV) {
+        this.cantidadV = cantidadV;
+    }
+
+
     public String getApellido() {
         return apellido;
     }
@@ -39,9 +52,9 @@ public class Customer {
         return correo;
     }
 
-     public void setCorreo(String correo){
-        this.correo=correo;
-        }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public int getNumCliente() {
         return numCliente;
@@ -50,7 +63,6 @@ public class Customer {
     public void setNumCliente(int numCliente) {
         this.numCliente = numCliente;
     }
-    
 
     public int getEdad() {
         return edad;
@@ -83,41 +95,56 @@ public class Customer {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    int numClientes = 0;
-    
-    public int numeroClientesRegistrados(){
-        numCliente+=1;
-        return numCliente;
+
+    public String correoDado(String correo) {
+        String correoDado;
+        do {
+            correoDado = JOptionPane.showInputDialog("Ingrese su correo: ");
+            if (correoDado.contains("@")) {
+                switch (correoDado.substring(correoDado.indexOf("@"))) {
+                    case "@gmail.com" ->
+                        correo = correoDado;
+                    case "@hotmail.com" ->
+                        correo = correoDado;
+                    default ->
+                        JOptionPane.showMessageDialog(null, "Error: correo no valido"
+                                + " debe ser una cuenta valida", "Error", 0);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: correo no valido"
+                        + " debe contener @", "Alerta", 0);
+            }
+
+        } while (correo == null || correo.equals(""));
+        return correoDado;
+    }
+
+    public boolean comprado() {
+        return comprado;
+    }
+
+    public void setComprado(boolean comprado) {
+        this.comprado = comprado;
+    }
+
+    public boolean isReservado() {
+        return reservado;
     }
     
-     public String correoDado(String correo){
-        String correoDado;
-        do{   
-        correoDado=JOptionPane.showInputDialog("Ingrese su correo: ");
-            if(correoDado.contains("@")){
-            switch (correoDado.substring(correoDado.indexOf("@"))) {
-                case "@gmail.com" -> correo=correoDado;
-                case "@hotmail.com" -> correo=correoDado;
-                default -> JOptionPane.showMessageDialog(null,"Error: correo no valido"+
-                            " debe ser una cuenta valida" , "Error", 0);
-            }
-            }else{
-               JOptionPane.showMessageDialog(null, "Error: correo no valido"+
-                    " debe contener @", "Alerta", 0);
-            }
-        
-       }while(correo==null ||correo.equals(""));
-        return correoDado;
-     }
-
+    public void setReservado(boolean reservado) {
+        this.reservado = reservado;
+    }
+    
     @Override
     public String toString() {
         return """
                Cliente
-                [id= """ + id + "\n"+
-                "nombre= " + nombre +"  apellido= "+apellido+"\n"+
-                "edad= "+edad+"  numTel= "+numeroTel+"\n"+
-                "correo= "+correo+"]"+"\n"+
-        "----------------------------------";
+                [id= """ + id + "\n"
+                + "nombre= " + nombre + "  apellido= " + apellido + "\n"
+                + "edad= " + edad + "  numTel= " + numeroTel + "\n"
+                + "correo= " + correo + "]" + "\n"
+                + "----------------------------------";
     }
+
+    
 }
