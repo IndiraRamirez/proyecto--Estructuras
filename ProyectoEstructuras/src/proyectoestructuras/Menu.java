@@ -118,39 +118,40 @@ public class Menu {
                 case 5 -> {
                     JOptionPane.showMessageDialog(null, " A continuacion"
                             + " se le presentaran los reportes: ");
-                    int opcionR = Integer.parseInt(JOptionPane.showInputDialog("""
+                    String[] opcionesR = {"1. Autos", "2. Clientes", "3. Top", "4. Vehiculos vendidos", "5. Vehiculos reservados", "6. Salir"};
+                    int opcionR = JOptionPane.showOptionDialog(null, """
                        Seleccione una opcion:
                        1.Cantidad total de autos venditos, reservados y disponibles
-                       2.Cantidad de clientes registrados, clientes que compraron un vehículo, clientes que reservaron un 
-                       vehículo.
+                       2.Cantidad de clientes registrados, clientes que compraron un vehículo, clientes que reservaron un vehículo.
                        3.Top 3 de clientes que más compraron vehículos
                        4.Cantidad de vehículos vendidos por vendedor
-                       5.Cantidad de vehículos reservados por vendedor"""));
+                       5.Cantidad de vehículos reservados por vendedor
+                       6.Salir                                       """, "Reportes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcionesR, opcionesR[5]);
                     switch (opcionR) {
-                        case 1 -> {
+                        case 0 -> {
                             int cantidadReservadosV = listaDeVehiculos.calcularCantidadReservado();
                             int cantidadCompradosV = listaDeVehiculos.calcularCantidadVendidos();
                             int cantidadDisponiblesV = listaDeVehiculos.calcularCantidadDisponibles();
                             listaDeVehiculos.reporteVehiculo(cantidadCompradosV, cantidadReservadosV, cantidadDisponiblesV);
                         }
-                        case 2 -> {
+                        case 1 -> {
                             lista.calcularCantidadComprado();
                             lista.calcularCantidadReservado();
                             JOptionPane.showMessageDialog(null, "La cantidad de clientes registrados son " + cantidadCl + "\n"
                                     + "La cantidad de clientes con vehículos comprados son " + cantidadCompraron + "\n"
                                     + "La cantidad de clientes con vehículos reservados son " + cantidadReservado + "\n");
                         }
-                        case 3 -> {
+                        case 2 -> {
                             
                             JOptionPane.showMessageDialog(null, lista.getMayor());
                         }
-                        case 4 -> {
+                        case 3 -> {
                             JOptionPane.showMessageDialog(null, m.getVendedoresV());
                         }
-                        case 5 -> {
+                        case 4 -> {
                              JOptionPane.showMessageDialog(null,m.getVendedoresR());
                         }
-                        case 0 -> {
+                        case 5 -> {
                             break;
                         }
                         default ->
