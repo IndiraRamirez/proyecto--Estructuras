@@ -52,6 +52,28 @@ public class Grafo {
             default: return "desconocido";
         }
     }
+
+    public Promocion obtenerPromocion(String marca, String tipo) {
+        // Una manera de obtener el índice de la marca y el tipo basado en strings
+        int indiceMarca = obtenerIndiceMarca(marca);
+        int indiceTipo = obtenerIndiceTipo(tipo);
+        
+        if (indiceMarca >= 0 && indiceTipo >= 0) {
+            NodoGrafo nodo = matriz[indiceMarca][indiceTipo];
+            return nodo != null ? nodo.getPromocion() : null;
+        }
+        return null;
+    }
+
+    private int obtenerIndiceMarca(String marca) {
+        
+        return -1; 
+    }
+
+    private int obtenerIndiceTipo(String tipo) {
+        
+        return -1; 
+    }
     
 
 }

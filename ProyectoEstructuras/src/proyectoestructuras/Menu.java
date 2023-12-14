@@ -365,21 +365,17 @@ public class Menu {
     private void consultarGarantiaVehiculo() {
         String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
         String tipo = JOptionPane.showInputDialog("Ingrese el tipo de vehículo (suv, sedan, hatchback):");
-        if (marca != null && !marca.isEmpty() && tipo != null && !tipo.isEmpty()) {
-            // Asumimos que tienes un método que carga las promociones del archivo al grafo
-            grafoDeGarantias.cargarPromocionesDeArchivo("promociones.txt");
-            Promocion promocion = grafoDeGarantias.obtenerPromocion(marca, tipo);
-            if (promocion != null) {
-                String mensaje = "Promociones para " + tipo + " de " + marca + ":\n"
-                                 + "% Cashback: " + promocion.getCashback() + "\n"
-                                 + "Km de Garantía: " + promocion.getKmGarantia() + "\n"
-                                 + "Mantenimientos Gratis: " + promocion.getCantMantenimientosGratis();
-                JOptionPane.showMessageDialog(null, mensaje);
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay promociones disponibles para el tipo de vehículo seleccionado.");
-            }
+        
+        Promocion promocion = grafoDeGarantias.obtenerPromocion(marca, tipo);
+        
+        if (promocion != null) {
+            String mensaje = "Promociones para " + tipo + " de " + marca + ":\n" +
+                             "% Cashback: " + promocion.getCashback() + "\n" +
+                             "Km de Garantía: " + promocion.getKmGarantia() + "\n" +
+                             "Mantenimientos Gratis: " + promocion.getCantMantenimientosGratis();
+            JOptionPane.showMessageDialog(null, mensaje);
         } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar la marca y el tipo de vehículo.");
+            JOptionPane.showMessageDialog(null, "No hay promociones disponibles para el tipo de vehículo seleccionado.");
         }
     }
 
