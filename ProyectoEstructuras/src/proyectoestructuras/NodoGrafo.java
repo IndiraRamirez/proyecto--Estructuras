@@ -9,22 +9,29 @@ public class NodoGrafo {
         this.promocion = promocion;
     }
 
-    // Getters y Setters
+    // Getters
     public String getTipoVehiculo() {
         return tipoVehiculo;
-    }
-
-    public void setTipoVehiculo(String tipoVehiculo) {
-        this.tipoVehiculo = tipoVehiculo;
     }
 
     public Promocion getPromocion() {
         return promocion;
     }
 
+    // Setters
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
     }
+
+    @Override
+    public String toString() {
+        return "Tipo de Vehículo: " + tipoVehiculo + ", Promoción: " + promocion;
+    }
 }
+
 
 

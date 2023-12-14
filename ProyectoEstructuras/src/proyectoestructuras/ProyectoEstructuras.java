@@ -16,7 +16,10 @@ import javax.swing.JOptionPane;
  */
 public class ProyectoEstructuras {
 
+
     public static void main(String[] args) throws IOException {
+
+        
         Menu m = new Menu();
         Configuracion conf = new Configuracion();
         ManejoArchivos logins = new ManejoArchivos();

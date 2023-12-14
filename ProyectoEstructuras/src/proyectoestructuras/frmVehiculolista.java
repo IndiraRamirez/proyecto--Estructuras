@@ -15,6 +15,8 @@ public class frmVehiculolista extends javax.swing.JFrame {
     public frmVehiculolista() {
         initComponents();
         cargarDatosDesdeArchivo(); // Llama a este método para cargar los datos al abrir el JFrame
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     private void cargarDatosDesdeArchivo() {
@@ -68,6 +70,7 @@ public class frmVehiculolista extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setAutoscrolls(true);
 

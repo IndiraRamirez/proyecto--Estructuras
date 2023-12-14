@@ -35,4 +35,12 @@ public class Promocion {
     public void setCantMantenimientosGratis(int cantMantenimientosGratis) {
         this.cantMantenimientosGratis = cantMantenimientosGratis;
     }
+
+    @Override
+    public String toString() {
+        return "Cashback: " + cashback + "%, Km de garantía: " + kmGarantia + 
+               ", Mantenimientos gratis: " + cantMantenimientosGratis;
+    }
 }
+
+

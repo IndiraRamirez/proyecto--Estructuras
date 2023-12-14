@@ -260,6 +260,29 @@ public class ManejoArchivos {
             System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
+
+    public void cargarPromocionesDeArchivo(String nombreArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                String marca = data[0];
+                String tipo = data[1];
+                double cashback = Double.parseDouble(data[2]);
+                int kmGarantia = Integer.parseInt(data[3]);
+                int mantenimientosGratis = Integer.parseInt(data[4]);
+                
+                this.agregarPromocion(marca, tipo, new Promocion(cashback, kmGarantia, mantenimientosGratis));
+            }
+        } catch (IOException e) {
+            System.err.println("Error al cargar promociones del archivo: " + e.getMessage());
+        }
+    }
+
+    private void agregarPromocion(String marca, String tipo, Promocion promocion) {
+    }
+
+    
     
 }
  

@@ -15,13 +15,18 @@ import javax.swing.JOptionPane;
  * @author jeffry
  */
 public class Menu {
+    
     Customer p = new Customer();
     ListaCliente lista = new ListaCliente();
     Configuracion conf = new Configuracion();
     ManejoArchivos m = new ManejoArchivos();
+    
     private ListaDeVehiculos listaDeVehiculos = new ListaDeVehiculos();
+    private Grafo grafoDeGarantias;
+
     
     public void Menu_UsuarioGlobal() throws IOException {
+        grafoDeGarantias = new Grafo("Garantias");
         int opcion;
         do {
             String opciones[] = {
@@ -99,7 +104,7 @@ public class Menu {
                                 + "Por favor, seleccione nuevamente.");
                         } 
                 }case 6 ->{   
-                    //mostrarMenuDeGarantias();
+                    agregarGarantiaVehiculo();
                          
                 }case 7 ->{
                      JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
@@ -150,26 +155,20 @@ public class Menu {
                 }
                     
                 case 1 -> {
-                    java.awt.EventQueue.invokeLater(new Runnable(){
-                        public void run(){
-                            new frmVehiculolista().setVisible(true);
-                            
-                        }
-                    
                     // Limpia la lista actual
-                    //listaDeVehiculos.limpiarLista();
+                    listaDeVehiculos.limpiarLista();
                     
                     // Carga los vehículos desde el archivo
-                    //listaDeVehiculos.cargarDesdeArchivo();
+                    listaDeVehiculos.cargarDesdeArchivo();
                     
                     // Obtiene la lista de vehículos
-                    //String vehiculosStr = listaDeVehiculos.listarVehiculos();
+                    String vehiculosStr = listaDeVehiculos.listarVehiculos();
                     
-                    //if (vehiculosStr == null || vehiculosStr.isEmpty()) {
-                    //    JOptionPane.showMessageDialog(null, "No hay vehículos registrados.");
-                    //} else {
-                    //    JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
-                    }  ); 
+                    if (vehiculosStr == null || vehiculosStr.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay vehículos registrados.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lista de Vehículos:\n" + vehiculosStr);
+                    }   
                 }case 2 -> {
                     //El programa debe permitir la creación de clientes.
                   String correo="";
@@ -215,6 +214,7 @@ public class Menu {
                        }
                     }while(op!=3);
                 }case 4 ->{
+                    consultarGarantiaVehiculo();
                 }case 5 ->{
                 }case 6 ->{
                      JOptionPane.showMessageDialog(null,  conf.toString(), "Información de la Empresa", JOptionPane.INFORMATION_MESSAGE);
@@ -344,14 +344,47 @@ public class Menu {
     public void Guardar(){
         m.EscribirArchivo(lista);
     }
+    private void agregarGarantiaVehiculo() {
+        String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
+        String tipo = JOptionPane.showInputDialog("Ingrese el tipo de vehículo (suv, sedan, hatchback):");
+        double cashback = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el porcentaje de cashback:"));
+        int kmGarantia = Integer.parseInt(JOptionPane.showInputDialog("Ingrese los km de garantía:"));
+        int cantMantenimientosGratis = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de mantenimientos gratis:"));
+    
+        if (marca != null && !marca.isEmpty() && tipo != null && !tipo.isEmpty()) {
+            Promocion nuevaPromocion = new Promocion(cashback, kmGarantia, cantMantenimientosGratis);
+            // Aquí asumimos que tienes un método que guarda la promoción en el archivo
+            grafoDeGarantias.guardarPromocionEnArchivo("promociones.txt", nuevaPromocion, marca, tipo);
+            JOptionPane.showMessageDialog(null, "Garantía agregada correctamente para " + tipo + " de " + marca);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos requeridos.");
+        }
+    }
+    
 
-    //private void mostrarMenuDeGarantias() {
-      //  String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
-        //if (marca != null && !marca.isEmpty()) {
-          //  grafo.mostrarPromociones(marca);
-        //} else {
-          //  JOptionPane.showMessageDialog(null, "No se ingresó una marca válida.");
-        //}
-    //}
+    private void consultarGarantiaVehiculo() {
+        String marca = JOptionPane.showInputDialog("Ingrese la marca del vehículo:");
+        String tipo = JOptionPane.showInputDialog("Ingrese el tipo de vehículo (suv, sedan, hatchback):");
+        if (marca != null && !marca.isEmpty() && tipo != null && !tipo.isEmpty()) {
+            // Asumimos que tienes un método que carga las promociones del archivo al grafo
+            grafoDeGarantias.cargarPromocionesDeArchivo("promociones.txt");
+            Promocion promocion = grafoDeGarantias.obtenerPromocion(marca, tipo);
+            if (promocion != null) {
+                String mensaje = "Promociones para " + tipo + " de " + marca + ":\n"
+                                 + "% Cashback: " + promocion.getCashback() + "\n"
+                                 + "Km de Garantía: " + promocion.getKmGarantia() + "\n"
+                                 + "Mantenimientos Gratis: " + promocion.getCantMantenimientosGratis();
+                JOptionPane.showMessageDialog(null, mensaje);
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay promociones disponibles para el tipo de vehículo seleccionado.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar la marca y el tipo de vehículo.");
+        }
+    }
+
+    public void cargarDatosEnGrafo() {
+    }
+    
 
 } 

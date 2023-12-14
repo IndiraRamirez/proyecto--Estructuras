@@ -1,75 +1,57 @@
 package proyectoestructuras;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
+import java.io.PrintWriter;
 
 public class Grafo {
-    private HashMap<String, HashMap<String, Promocion>> grafo;
+    private String nombre;
+    private NodoGrafo[][] matriz;  
 
-    public Grafo() {
-        this.grafo = new HashMap<>();
+    public Grafo(String nombre) {
+        this.nombre = nombre;
+
+        this.matriz = new NodoGrafo[3][3];
     }
 
-    public void leerArchivoYCrearGrafo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Marca, Tipo, %Cashback, KmGarantia, MantenimientosGratis
-                String[] data = line.split(",");
-                String marca = data[0].trim();
-                String tipo = data[1].trim();
-                double cashback = Double.parseDouble(data[2].trim());
-                int kmGarantia = Integer.parseInt(data[3].trim());
-                int mantenimientosGratis = Integer.parseInt(data[4].trim());
+    public void agregarPromocion(int indiceMarca, int indiceTipo, Promocion promocion) {
 
-                this.agregarPromocion(marca, tipo, new Promocion(cashback, kmGarantia, mantenimientosGratis));
-            }
+        if (indiceMarca >= 0 && indiceMarca < matriz.length && 
+            indiceTipo >= 0 && indiceTipo < matriz[indiceMarca].length) {
+            matriz[indiceMarca][indiceTipo] = new NodoGrafo(obtenerTipoVehiculo(indiceMarca), promocion);
+        }
+    }
+
+    public Promocion obtenerPromocion(int indiceMarca, int indiceTipo) {
+        if (indiceMarca >= 0 && indiceMarca < matriz.length && 
+            indiceTipo >= 0 && indiceTipo < matriz[indiceMarca].length) {
+            NodoGrafo nodo = matriz[indiceMarca][indiceTipo];
+            return nodo != null ? nodo.getPromocion() : null;
+        }
+        return null;
+    }
+
+    public void guardarPromocionEnArchivo(String nombreArchivo, Promocion promocion, String marca, String tipo) {
+        try (FileWriter fw = new FileWriter(nombreArchivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(marca + "," + tipo + "," + promocion.getCashback() + "," + promocion.getKmGarantia() + "," + promocion.getCantMantenimientosGratis());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error al guardar la promoción en el archivo: " + e.getMessage());
         }
     }
 
-    public void agregarPromocion(String marca, String tipo, Promocion promocion) {
-        HashMap<String, Promocion> tipos = grafo.getOrDefault(marca, new HashMap<>());
-        tipos.put(tipo, promocion);
-        grafo.put(marca, tipos);
-    }
 
-    public Promocion obtenerPromocion(String marca, String tipo) {
-        return grafo.getOrDefault(marca, new HashMap<>()).get(tipo);
-    }
 
-    public boolean eliminarPromocion(String marca, String tipo) {
-        HashMap<String, Promocion> tipos = grafo.get(marca);
-        if (tipos != null && tipos.containsKey(tipo)) {
-            tipos.remove(tipo);
-            // Si después de eliminar la promoción no quedan más tipos para la marca, eliminar también la marca.
-            if (tipos.isEmpty()) {
-                grafo.remove(marca);
-            }
-            return true; // Retornar true si la promoción fue eliminada con éxito.
-        }
-        return false; 
-    }    
-
-    public void mostrarPromociones(String marca) {
-        HashMap<String, Promocion> tipos = grafo.get(marca);
-        if (tipos != null) {
-            String sb = new StringBuilder("Promociones para " + marca + ":\n");
-            for (String tipo : tipos.keySet()) {
-                Promocion p = tipos.get(tipo);
-                sb.append(tipo).append(": %Cashback ").append(p.getCashback())
-                  .append(", Km Garantía ").append(p.getKmGarantia())
-                  .append(", Mantenimientos Gratis ").append(p.getCantMantenimientosGratis())
-                  .append("\n");
-            }
-            JOptionPane.showMessageDialog(null, sb.toString());
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay promociones disponibles para la marca " + marca);
+    private String obtenerTipoVehiculo(int index) {
+        switch (index) {
+            case 0: return "suv";
+            case 1: return "sedan";
+            case 2: return "hatchback";
+            default: return "desconocido";
         }
     }
+    
+
 }
-
